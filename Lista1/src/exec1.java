@@ -8,6 +8,8 @@ public class exec1 {
         System.out.println("EXERCICIO 1: RAIZ QUADRADA\n");
         int num = 0;
         boolean leu = false;
+        
+        // validação do num (análogo ao feito em aula)
         while(!leu){
             leu = true;
             System.out.printf("Digite um inteiro: ");
@@ -28,6 +30,7 @@ public class exec1 {
         float xi_1 = num/2; // x0
         float erro = 1; // entrar no while
         
+        // fórmula iterativa
         while(erro > 0.00000001){
             xi = (xi_1 + (num/xi_1))/2;
             erro = xi - xi_1;
@@ -35,6 +38,7 @@ public class exec1 {
                 erro *= -1;
             xi_1 = xi;
         }
+        // resposta final
         System.out.printf("A raiz quadrada de %d é %f\n", num, xi);
     }
     
