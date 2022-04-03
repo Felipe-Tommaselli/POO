@@ -5,11 +5,12 @@
 public class exec1 {
 
     public static void main(String[] args) {
+        // cabeçalho
         System.out.println("EXERCICIO 1: RAIZ QUADRADA\n");
+
+        // validação do num (análogo ao feito em aula)
         int num = 0;
         boolean leu = false;
-        
-        // validação do num (análogo ao feito em aula)
         while(!leu){
             leu = true;
             System.out.printf("Digite um inteiro: ");
@@ -25,12 +26,13 @@ public class exec1 {
             }
             System.out.printf("Numero lido: %d\n", num);
         }
+        
         // validado o num, vamos fazer a raiz quadrada agora
         float xi = 0;
         float xi_1 = num/2; // x0
         float erro = 1; // entrar no while
         
-        // fórmula iterativa
+        // fórmula iterativa da raiz quadrada com erro do enunciado
         while(erro > 0.00000001){
             xi = (xi_1 + (num/xi_1))/2;
             erro = xi - xi_1;
