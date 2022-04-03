@@ -2,10 +2,10 @@
  *
  * @author 11800910
  */
-public class exec4 {
+public class exec4_1 {
 
     public static void main(String[] args) {
-        System.out.println("EXERCICIO 3: Arvore esquerda->direita\n");
+        System.out.println("EXERCICIO 4 (parte 1): Arvore direita->esquerda\n");
         int num = 0;
         boolean leu = false;
         while(!leu){

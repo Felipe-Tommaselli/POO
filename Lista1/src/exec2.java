@@ -6,7 +6,7 @@
 import java.lang.Math;
 
 public class exec2 {
-    
+
     public static void main(String[] args) {
         System.out.println("EXERCICIO 2: EQUAÇÃO SEGUNDO GRAU\n");
         int num = 0;
