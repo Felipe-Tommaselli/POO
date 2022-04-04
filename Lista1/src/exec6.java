@@ -32,10 +32,17 @@ public class exec6 {
             nums[i] = num;
             i++;
         }
-        // com num validado, vamos procurar o proximo menor num
-        while(i<9){
-            System.out.printf("nums[%d]: %f\n", i, nums[i]);
-            i++;
+        // com num validado, vamos achar o maior e o menor valor
+        int j = 0;
+        double maior = 0.0;
+        double menor = 0.0;
+        while(j < i){
+            if(nums[j] > maior)
+                maior =nums[j];
+            if(nums[j] < menor)
+                menor =nums[j];
+            System.out.printf("nums[%d]: %f\n", j, nums[j]);
+            j++;
         }
     }
 }
