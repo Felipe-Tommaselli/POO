@@ -1,7 +1,7 @@
-/**
+'''
  *
  * @author 11800910
- */
+'''
 
 def valida_entrada():
     while(True):

@@ -1,7 +1,7 @@
-/**
+'''
  *
  * @author 11800910
- */
+'''
 
 def raiz_quadrada():
     
