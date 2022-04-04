@@ -29,10 +29,10 @@ if __name__ == '__main__':
     # loop vertical (até acabar o num)
     while x > 0:
         # loop horizontal (até acabar a linha)
-        for _ in range(0, espacos):
+        for _ in range(0, espacos + 1):
             print(' ', end="")
         # espacos roda horizontalmente de 0 até num
-        for _ in range(0, asteriscos):
+        for _ in range(0, asteriscos + 1):
             print('*', end="")
         print('\n')
         asteriscos -= 1
