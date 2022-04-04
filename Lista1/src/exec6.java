@@ -37,8 +37,5 @@ public class exec6 {
             System.out.printf("nums[%d]: %f\n", i, nums[i]);
             i++;
         }
-        // resposta
-        System.out.printf("O primeiro menor primo depois \n");
-
     }
 }
