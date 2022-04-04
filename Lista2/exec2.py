@@ -8,7 +8,7 @@ import math
 def valida_entrada():
     while(True):
         try:
-            num = int(input('"Digite um inteiro: '))
+            num = int(input('Digite um inteiro: '))
             break
         except ValueError:
             print('O valor que vc digitou não é um número inteiro')
@@ -38,10 +38,10 @@ if __name__ == '__main__':
     # para cada caso do discriminante, a equação terá diferentes soluções
     # a partir disso, é aplicada a fórmula de baskhara
     #* SEM RAIZES REAL
-    if(delta < 0):
+    if delta < 0:
         print('Equação fornecida não possui soluçaõ :(')
     #* UMA RAIZ REAL
-    elif(delta == 0):
+    elif delta == 0:
         x = (-b)/(2.0*a)
         print('Equação fornecida tem uma solução:', x)
     #* DUAS RAIZES REAIS
