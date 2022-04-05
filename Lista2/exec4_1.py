@@ -27,12 +27,12 @@ if __name__ == '__main__':
     asteriscos = num
     espacos = 0
     # loop vertical (até acabar o num)
-    while x > 0:
+    while asteriscos > 0:
         # loop horizontal (até acabar a linha)
-        for _ in range(0, espacos + 1):
+        for _ in range(0, espacos):
             print(' ', end="")
         # espacos roda horizontalmente de 0 até num
-        for _ in range(0, asteriscos + 1):
+        for _ in range(0, asteriscos):
             print('*', end="")
         print('\n')
         asteriscos -= 1
