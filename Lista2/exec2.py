@@ -14,18 +14,15 @@ def valida_entrada():
             print('O valor que vc digitou não é um número inteiro')
     return num
 
-def raiz_quadrada():
-    
-
 if __name__ == '__main__':
 
     # cabeçalho
     print('EXERCICIO 2: EQUAÇÃO SEGUNDO GRAU\n')
     
     # valdação da entrada 
-    a0 = valida_entrada()
-    b0 = valida_entrada()
-    c0 = valida_entrada()
+    a = valida_entrada()
+    b = valida_entrada()
+    c = valida_entrada()
 
     # com num validado, vamos calcular a solução
     delta = 0
@@ -49,4 +46,4 @@ if __name__ == '__main__':
         x = (-b + math.sqrt(delta))/(2.0*a)
         print('Equação fornecida tem duas soluções:', x, end="")
         x = (-b - math.sqrt(delta))/(2.0*a)
-        print('e', x)
+        print(' e', x)
