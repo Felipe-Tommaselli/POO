@@ -30,9 +30,9 @@ if __name__ == '__main__':
     maior = lista[0]
     for _ in lista:
         if _ < menor:
-            menor = i
+            menor = _
         if _ > maior:
-            maior = i
+            maior = _
 
     # resposta
     print(f'O maior número digitado foi {maior} e o menor {menor}')
