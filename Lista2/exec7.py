@@ -3,6 +3,8 @@
  * @author 11800910
 '''
 
+#! código base: https://github.com/Felipe-Tommaselli/Calculo-numerico/blob/main/Trabalho1/Codigos/bisse%C3%A7%C3%A3o.py
+
 import math
 
 def valida_entrada():
