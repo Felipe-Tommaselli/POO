@@ -24,11 +24,10 @@ if __name__ == '__main__':
     num = valida_entrada()
 
     # com num validado, vamos verificar se ele é primo
-    bool primo = True
-    int i
+    primo = True
 
     # teste de divisão (i guarda o menor divisor comum caso haja)
-    for i in range(2, num + 1):
+    for i in range(2, num):
         if num % i == 0:
             primo = False
             break
