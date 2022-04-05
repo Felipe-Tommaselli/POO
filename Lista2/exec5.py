@@ -24,13 +24,15 @@ if __name__ == '__main__':
     num = valida_entrada()
 
     # com num validado, vamos procurar o proximo menor num
-    bool primo = True
+    primo = True
     menor_primo = num
 
+    # loop indo de num a 0 procurando um primo
     while menor_primo > 0:
+        # teste de numero primo
         primo = True
-        for i in range(2, num + 1):
-            if num % i == 0:
+        for i in range(2, menor_primo):
+            if (menor_primo % i) == 0:
                 primo = False
                 break
         if primo == True:
