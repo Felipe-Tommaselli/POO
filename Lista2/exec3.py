@@ -7,6 +7,9 @@ def valida_entrada():
     while(True):
         try:
             num = int(input('Digite um inteiro: '))
+            if num < 0:
+                print('Número deve ser positivo!!')
+                continue
             break
         except ValueError:
             print('O valor que vc digitou não é um número inteiro')
