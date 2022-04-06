@@ -3,11 +3,7 @@
  * @author 11800910
 '''
 
-<<<<<<< HEAD
 # link calc num: https://github.com/Felipe-Tommaselli/Calculo-numerico/blob/main/Trabalho1/Codigos/bisse%C3%A7%C3%A3o.py
-=======
-#! código base: https://github.com/Felipe-Tommaselli/Calculo-numerico/blob/main/Trabalho1/Codigos/bisse%C3%A7%C3%A3o.py
->>>>>>> dcc08c90579f0832c630f1f997fc09482cc72e5e
 
 import math
 
