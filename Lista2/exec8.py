@@ -46,5 +46,5 @@ if __name__ == '__main__':
         xk = xr
         i += 1
     
-    # saida
+    # resposta
     print(f'\nsolução: {xk}, com valor {func(xk)} na iteração {i}')
