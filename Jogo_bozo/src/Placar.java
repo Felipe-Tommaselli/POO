@@ -3,11 +3,9 @@
  * @author 11800910
  */
 
+import java.util.Arrays;
+
 public class Placar {
-
-    import java.util.Arrays;
-
-    public class Placar {
         /*
         OBS: adaptações para vetor baseado em 0.
         Posições do tabuleiro (0 a 5 e posições especiais)
