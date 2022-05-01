@@ -22,6 +22,9 @@ public class exec2 {
         while(i <= 3){
             leu = false;
             num = 0;
+
+
+            
         // validação da entrada num (análogo ao feito em aula)
         while(!leu){
                 leu = true;
