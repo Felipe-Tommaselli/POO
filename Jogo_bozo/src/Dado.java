@@ -1,42 +1,50 @@
 
 
 /**
- * Simula um dado de número de lados variados. Ao criar o objeto é possível estabelecer o número de lados. 
- * A rolagem do dado é feita por meio de um gerador de números aleatórios (Random).
+ * Simula um dado de número de ladostr variados. Ao criar o objeto é possível estabelecer o número de lados. 
+ * A rolagem do dado é feita por meio de um gerador de númerostr aleatóriostr (Random).
  * @author 11800910
  */
 
-public class Dado {
+public class Dado{
 
     private int faces;
-    private int numeroRolado;
-    private Random random;
+    private int num_rolado;
+    private Random rand;
 
+    /**
+     * Construtor que cria o dado com 6 faces
+     */
     public Dado(){
         this.faces = 6;
-        random = new Random();
-    }
-
-    public Dado(int n){
-        this.faces = n;
-        random = new Random();
+        rand = new Random();
     }
 
     /**
-     * Recupera o último número selecionado.
-     * @return
+     * Construtor que cria o dado com n faces
+     * @param n
      */
-    public int getLado(){
-        return this.numeroRolado;
+    public Dado(int n){
+        this.faces = n;
+        rand = new Random();
     }
 
     /**
      * Simula a rolagem do dado por meio de um gerador aleatório.
-     * @return
+     * @return o número que foi sorteado
      */
     public int rolar(){
-        this.numeroRolado = this.random.getIntRand(this.faces) + 1;
-        return this.numeroRolado;
+        this.num_rolado = this.rand.getIntRand(this.faces);
+        this.num_rolado++;
+        return this.num_rolado;
+    }
+
+    /**
+     * Recupera o último número selecionado.
+     * @return o número que foi sorteado
+     */
+    public int getLado(){
+        return this.num_rolado;
     }
 
     /**
@@ -45,49 +53,59 @@ public class Dado {
      */
     @Override
     public String toString(){
-        String s = new String("");
-        s = s + "+-----+\n";
-        
-        switch(this.numeroRolado){
+        String str = new String("");
+    
+        int sel = this.num_rolado;
+        switch(sel){
             case 1:
-                s = s + "|     |\n";
-                s = s + "|  *  |\n";
-                s = s + "|     |\n";
+                str = str + "+-----+\n";
+                str = str + "|     |\n";
+                str = str + "|  *  |\n";
+                str = str + "|     |\n";
+                str = str + "+-----+\n";
                 break;
 
             case 2:
-                s = s + "|*    |\n";
-                s = s + "|     |\n";
-                s = s + "|    *|\n";
+                str = str + "+-----+\n";
+                str = str + "|*    |\n";
+                str = str + "|     |\n";
+                str = str + "|    *|\n";
+                str = str + "+-----+\n";
                 break;
 
             case 3:
-                s = s + "|*    |\n";
-                s = s + "|  *  |\n";
-                s = s + "|    *|\n";
+                str = str + "+-----+\n";
+                str = str + "|*    |\n";
+                str = str + "|  *  |\n";
+                str = str + "|    *|\n";
+                str = str + "+-----+\n";
                 break;
 
             case 4:
-                s = s + "|*   *|\n";
-                s = s + "|     |\n";
-                s = s + "|*   *|\n";
+                str = str + "+-----+\n";
+                str = str + "|*   *|\n";
+                str = str + "|     |\n";
+                str = str + "|*   *|\n";
+                str = str + "+-----+\n";
                 break;
             
             case 5:
-                s = s + "|*   *|\n";
-                s = s + "|  *  |\n";
-                s = s + "|*   *|\n";
+                str = str + "+-----+\n";
+                str = str + "|*   *|\n";
+                str = str + "|  *  |\n";
+                str = str + "|*   *|\n";
+                str = str + "+-----+\n";
                 break;
 
             case 6:
-                s = s + "|* * *|\n";
-                s = s + "|     |\n";
-                s = s + "|* * *|\n";
+                str = str + "+-----+\n";
+                str = str + "|* * *|\n";
+                str = str + "|     |\n";
+                str = str + "|* * *|\n";
+                str = str + "+-----+\n";
                 break;
         }
-
-        s = s + "+-----+\n";
-        return s;
+        return str;
     }
 
     /**
