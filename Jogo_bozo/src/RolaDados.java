@@ -1,29 +1,15 @@
+import static java.lang.Integer.*;
+import java.util.Arrays;
+
 /**
  * Essa é uma classe auxiliar que permite gerencia um conjunto de vários dados simultaneamente. 
  * Operações como rolar alguns dos dados ou exibir o resultado de todos eles, são implementadas.
  * @author 11800910
  */
-import static java.lang.Integer.*;
-import java.util.Arrays;
-
 public class RolaDados {
     private int num;
     private int[] resultado;
     private Dado[] lista;
-
-    /**
-     * Classe privada para dar um tempo de espera na geração de seeds no sorteio dos dados e garantir que eles não entrem com a mesma seed
-     * @param tms (tempo em milisegundos)
-     *
-     */
-    private static void esperaPor(int tms){  
-        try{
-            Thread.sleep(tms);
-        }
-        catch(InterruptedException ex){
-            Thread.currentThread().interrupt();
-        }
-    }
 
     /**
      * Construtor que cria e armazena vários objetos do tipo Dado. 
@@ -42,6 +28,20 @@ public class RolaDados {
             resultado[i] = 0;
         }
     }
+
+    /**
+     * Classe privada para dar um tempo de espera na geração de seeds no sorteio dos dados e garantir que eles não entrem com a mesma seed
+     * @param tms (tempo em milisegundos)
+     */
+    private static void esperaPor(int tms){  
+        try{
+            Thread.sleep(tms);
+        }
+        catch(InterruptedException ex){
+            Thread.currentThread().interrupt();
+        }
+    }
+
 
     /**
      * Rola todos os dados.
@@ -63,7 +63,7 @@ public class RolaDados {
      */
     public int[] rolar(boolean[] quais){
         for(int i = 0; i < this.num; i++)
-            if(quais[i])
+            if(quais[i] == true)
                 this.resultado[i] = lista[i].rolar();
 
         return this.resultado;
@@ -99,12 +99,11 @@ public class RolaDados {
     public String toString(){
         
         String[] final = new String[5];
-        String str = "1          2          3          4          5\n";
+        String str = "1      2      3       4       5\n";
 
         Arrays.fill(final, "");
         
 
-        //Iterando sobre os dados
         for(int i = 0; i < lista.length; i++){
             String[] str2 = lista[i];
             str2 = str2.toString();
