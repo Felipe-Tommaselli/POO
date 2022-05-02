@@ -1,6 +1,6 @@
 
 /**
- * 
+ * Essa é a classe inicial do programa Bozó. Possui apenas o método main, que cuida da execução do jogo.
  * @author 11800910
  */
 
@@ -8,28 +8,38 @@ public class Bozo {
     private static RolaDados dados;
     private static Placar placar;
     
-    public Bozo() {
+    public Bozo(){
         dados = new RolaDados(5);
         placar = new Placar();
     }
 
     private static String leStringTeclado() {
-        try {
+        try{
             return EntradaTeclado.leString();
         }
         catch(Exception e) {
-            System.out.println("Erro na leitura do teclado!");
+            System.out.println("Entrada invalida");
         }
 
         return null;
     }
 
+    /**
+     * Método inicial do programa. Ele cuida da execução do jogo e possui um laço, no qual cada iteração representa uma rodada do jogo. 
+     * Em cada rodada, o jogador joga os dados até 3 vezes e depois escolhe a posição do placar que deseja preencher. 
+     * No final das rodadas a pontuação total é exibida.
+     * @param args
+     */
     public static void main(String[] args) {
+        
+        System.out.println("\n====== JOGO DE BOZO ======");
+        System.out.println("      (SSC0103 - POO)\n\n");
+
         Bozo bozo = new Bozo();
         System.out.println(bozo.placar);
 
         for(int rodada = 1; rodada <= 10; rodada++) {
-            System.out.println("****** Rodada " + rodada);
+            System.out.println(" Rodada " + rodada);
             System.out.println("Pressione ENTER para lançar os dados");
             
             leStringTeclado();

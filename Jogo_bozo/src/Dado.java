@@ -1,10 +1,8 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 
 /**
- *
+ * Simula um dado de número de lados variados. Ao criar o objeto é possível estabelecer o número de lados. 
+ * A rolagem do dado é feita por meio de um gerador de números aleatórios (Random).
  * @author 11800910
  */
 
@@ -14,31 +12,43 @@ public class Dado {
     private int numeroRolado;
     private Random random;
 
-    public Dado() {
+    public Dado(){
         this.faces = 6;
         random = new Random();
     }
 
-    public Dado(int n) {
+    public Dado(int n){
         this.faces = n;
         random = new Random();
     }
 
-    public int getLado() {
+    /**
+     * Recupera o último número selecionado.
+     * @return
+     */
+    public int getLado(){
         return this.numeroRolado;
     }
 
-    public int rolar() {
+    /**
+     * Simula a rolagem do dado por meio de um gerador aleatório.
+     * @return
+     */
+    public int rolar(){
         this.numeroRolado = this.random.getIntRand(this.faces) + 1;
         return this.numeroRolado;
     }
 
+    /**
+     * Transforma representação do dado em String.
+     * Override no toString default 
+     */
     @Override
-    public String toString() {
+    public String toString(){
         String s = new String("");
         s = s + "+-----+\n";
         
-        switch(this.numeroRolado) {
+        switch(this.numeroRolado){
             case 1:
                 s = s + "|     |\n";
                 s = s + "|  *  |\n";
@@ -80,7 +90,9 @@ public class Dado {
         return s;
     }
 
-    public static void main(String[] args) {
-
+    /**
+     * Não tem função real dentro da classe.
+     */
+    public static void main(String[] args){
     }
 }
