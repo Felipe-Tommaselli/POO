@@ -42,8 +42,8 @@ public class Dado{
      * @return o número que foi sorteado
     */
     public int rolar(){
-        this.num_rolado = this.rand.getIntRand(this.faces);
-        this.num_rolado++;
+        this.num_rolado = this.rand.getIntRand(this.faces); // valor de 0 a 5
+        this.num_rolado++; // dado vai de 1 a 6
         return this.num_rolado;
     }
 
