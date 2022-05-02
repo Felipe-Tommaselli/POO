@@ -4,7 +4,7 @@
  * @author 11800910
  */
 
-public class Bozo {
+public class Bozo{
     private static RolaDados dados;
     private static Placar placar;
     
@@ -13,7 +13,7 @@ public class Bozo {
         placar = new Placar();
     }
 
-    private static String leStringTeclado() {
+    private static String leStringTeclado(){
         try{
             return EntradaTeclado.leString();
         }
@@ -30,7 +30,7 @@ public class Bozo {
      * No final das rodadas a pontuação total é exibida.
      * @param args
      */
-    public static void main(String[] args) {
+    public static void main(String[] args){
         
         System.out.println("\n====== JOGO DE BOZO ======");
         System.out.println("      (SSC0103 - POO)\n\n");
@@ -38,7 +38,7 @@ public class Bozo {
         Bozo bozo = new Bozo();
         System.out.println(bozo.placar);
 
-        for(int rodada = 1; rodada <= 10; rodada++) {
+        for(int rodada = 1; rodada <= 10; rodada++){
             System.out.println(" Rodada " + rodada);
             System.out.println("Pressione ENTER para lançar os dados");
             
@@ -48,7 +48,7 @@ public class Bozo {
             rolagemDados = bozo.dados.rolar();
             System.out.println(bozo.dados);
             
-            for(int troca = 0; troca < 2; troca++) {
+            for(int troca = 0; troca < 2; troca++){
                 System.out.println("Solicite os números dos dados que quiser TROCAR, separados por espaços");
                 String s = leStringTeclado();
                 rolagemDados = bozo.dados.rolar(s);
