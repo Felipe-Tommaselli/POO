@@ -8,12 +8,7 @@ public class Bozo{
     private static RolaDados dados;
     private static Placar placar;
     
-    public Bozo(){
-        dados = new RolaDados(5);
-        placar = new Placar();
-    }
-
-    private static String leStringTeclado(){
+    private static String leString(){
         try{
             return EntradaTeclado.leString();
         }
@@ -32,50 +27,55 @@ public class Bozo{
      */
     public static void main(String[] args){
         
+        dados = new RolaDados(5);
+        placar = new Placar();
+
         System.out.println("\n====== JOGO DE BOZO ======");
         System.out.println("      (SSC0103 - POO)\n\n");
 
-        Bozo bozo = new Bozo();
-        System.out.println(bozo.placar);
+        System.out.println(placar);
 
         for(int rodada = 1; rodada <= 10; rodada++){
-            System.out.println(" Rodada " + rodada);
-            System.out.println("Pressione ENTER para lançar os dados");
             
-            leStringTeclado();
+            String enter = " "; // inicia com valor qualquer
+
+            System.out.println(" Rodada " + rodada);
+            while(enter != ""){
+                System.out.println("Pressione ENTER para lançar os dados");
+                enter = leString();
+            }
 
             int[] rolagemDados = new int[5];
-            rolagemDados = bozo.dados.rolar();
-            System.out.println(bozo.dados);
+            rolagemDados = dados.rolar();
             
-            for(int troca = 0; troca < 2; troca++){
-                System.out.println("Solicite os números dos dados que quiser TROCAR, separados por espaços");
-                String s = leStringTeclado();
-                rolagemDados = bozo.dados.rolar(s);
-                System.out.println(bozo.dados);
+            
+            System.out.println(dados);
+            for(int i = 0; i < 2; i++){
+                
+                System.out.println("Solicite os números dos dados que quiser trocar, separados por espaços");
+                String str = leString();
+                rolagemDados = dados.rolar(str);
+                System.out.println(dados);
             }
 
-            System.out.println(bozo.placar);
-
-            System.out.print("Escolha a posição que será ocupada com essa jogada =====> ");
+            System.out.println(placar);
+            System.out.print("Escolha a posição que será ocupada com essa jogada: ");
             
-            int posicao = -1;
-
+            int pos = -5; // valor aleatorio
             try {
-                posicao = EntradaTeclado.leInt();
+                pos = EntradaTeclado.leInt();
             }
             catch(Exception e) {
-                System.out.println("Erro na leitura do teclado!");
+                System.out.println("Entrada invalida!");
             }
 
-            bozo.placar.add(posicao, rolagemDados);
+            placar.add(pos, rolagemDados);
             System.out.println("\n");
-            System.out.println(bozo.placar);
+            System.out.println(placar);
             
         }
 
         System.out.println("*****************************");
-        System.out.println("Seu score final foi: " + bozo.placar.getScore());
-        System.out.println("*****************************");
+        System.out.println("Score final: " + placar.getScore());
     }
 }
