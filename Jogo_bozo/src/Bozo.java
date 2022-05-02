@@ -8,15 +8,33 @@ public class Bozo{
     private static RolaDados dados;
     private static Placar placar;
     
-    private static String leString(){
+    /**
+     * Método privado para ler uma string do teclado, com a validação de entrada
+     * @return String do teclado 
+    */
+    private static String leString2(){
         try{
             return EntradaTeclado.leString();
         }
-        catch(Exception e) {
+        catch(Exception e){
             System.out.println("Entrada invalida");
         }
 
         return null;
+    }
+
+    /**
+     * Método privado para ler um inteiro do teclado, com a validação de entrada
+     * @return Inteiro do teclado 
+    */
+    private static int leInt2(){
+        try{
+            return EntradaTeclado.leInt();
+        }
+        catch(Exception e){
+            System.out.println("Entrada invalida!");
+        }
+    
     }
 
     /**
@@ -42,37 +60,28 @@ public class Bozo{
             System.out.println(" Rodada " + rodada);
             while(enter != ""){
                 System.out.println("Pressione ENTER para lançar os dados");
-                enter = leString();
+                enter = leString2();
             }
 
             int[] rolagemDados = new int[5];
             rolagemDados = dados.rolar();
             
-            
-            System.out.println(dados);
             for(int i = 0; i < 2; i++){
-                
                 System.out.println("Solicite os números dos dados que quiser trocar, separados por espaços");
-                String str = leString();
+                String str = leString2();
                 rolagemDados = dados.rolar(str);
                 System.out.println(dados);
             }
 
+            System.out.println(dados);
             System.out.println(placar);
             System.out.print("Escolha a posição que será ocupada com essa jogada: ");
             
-            int pos = -5; // valor aleatorio
-            try {
-                pos = EntradaTeclado.leInt();
-            }
-            catch(Exception e) {
-                System.out.println("Entrada invalida!");
-            }
+            int pos = -5; // valor aleatorio para incialização
+            pos = leInt2();
 
             placar.add(pos, rolagemDados);
-            System.out.println("\n");
-            System.out.println(placar);
-            
+            System.out.println("\n" + placar);
         }
 
         System.out.println("*****************************");

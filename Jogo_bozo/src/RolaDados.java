@@ -11,13 +11,16 @@ public class RolaDados {
     private int[] resultado;
     private Dado[] lista;
 
-    private static void esperar(int ms){  
-        try
-        {
-            Thread.sleep(ms);
+    /**
+     * Classe privada para dar um tempo de espera na geração de seeds no sorteio dos dados e garantir que eles não entrem com a mesma seed
+     * @param tms (tempo em milisegundos)
+     *
+     */
+    private static void esperaPor(int tms){  
+        try{
+            Thread.sleep(tms);
         }
-        catch(InterruptedException ex)
-        {
+        catch(InterruptedException ex){
             Thread.currentThread().interrupt();
         }
     }
@@ -33,8 +36,8 @@ public class RolaDados {
         this.resultado = new int[n];
         this.lista = new Dado[n];
 
-        for(int i = 0; i < this.num; i++){
-            esperar(50); //Delay responsável por consertar a seed do Random
+        for(int i = 0; i < n; i++){
+            esperaPor(50); 
             lista[i] = new Dado(6);
             resultado[i] = 0;
         }
@@ -46,10 +49,9 @@ public class RolaDados {
      *         Nesse caso, o valor retornado é o valor anterior que ele já possuia.
      */
     public int[] rolar(){
-        for(int i = 0; i < this.num; i++){
+        for(int i = 0; i < this.num; i++)
             this.resultado[i] = lista[i].rolar();
-        }
-
+        
         return this.resultado;
     }
 
@@ -60,11 +62,9 @@ public class RolaDados {
      *         Nesse caso, o valor retornado é o valor anterior que ele já possuia.
      */
     public int[] rolar(boolean[] quais){
-        for(int i = 0; i < this.num; i++){
-            if(quais[i]){
+        for(int i = 0; i < this.num; i++)
+            if(quais[i])
                 this.resultado[i] = lista[i].rolar();
-            }
-        }
 
         return this.resultado;
     }
@@ -76,16 +76,18 @@ public class RolaDados {
      *         Nesse caso, o valor retornado é o valor anterior que ele já possuia.
      */
     public int[] rolar(String s){
-        String numbersInString[] = s.replaceAll("[^1-" + this.num + "]+", " ").trim().split(" ");
+        // utilização de regular expressions para limpar o numero da string
+        String numStr[] = s.replaceAll("[^1-" + this.num + "]+", " "); // !
+        numStr = numStr.trim();
+        numStr = numStr.split(" ");
 
-        if(!numbersInString[0].isEmpty())
-        for(int i = 0; i < numbersInString.length; i++){
-            int dadoTarget = parseInt(numbersInString[i]) - 1;
-            
-            if(dadoTarget >= 0 && dadoTarget <= this.num)
-                this.resultado[dadoTarget] = lista[dadoTarget].rolar();
+        if(!numStr[0].isEmpty())
+        for(int i = 0; i < numStr.length; i++){
+            int dado = parseInt(numStr[i]);
+            dado--;
+            if(dado >= 0 && dado <= this.num) // 0 a 6 do dado padrão
+                this.resultado[dado] = lista[dado].rolar();
         }
-
         return this.resultado;
     }
 
@@ -95,29 +97,27 @@ public class RolaDados {
      */
     @Override
     public String toString(){
-        String[] finalStrings = new String[5];
-        Arrays.fill(finalStrings, "");
+        
+        String[] final = new String[5];
+        String str = "1          2          3          4          5\n";
 
-        String s = "1          2          3          4          5\n";
+        Arrays.fill(final, "");
+        
 
         //Iterando sobre os dados
         for(int i = 0; i < lista.length; i++){
-            String[] partsStringDado = lista[i].toString().split("\n");
+            String[] str2 = lista[i];
+            str2 = str2.toString();
+            str2 = str2.split("\n");
             
-            //Iterando sobre cada parte da String ao imprimir um dado e separando em strings finais
-            for(int j = 0; j < partsStringDado.length; j++){
-                finalStrings[j] += partsStringDado[j];
-                finalStrings[j] += "    ";
-            }
+            for(int j = 0; j < str2.length; j++)
+                final[j] += (str2[j] + "   ");
         }
         
-        //Concatenação das strings finais
-        for(int i = 0; i < finalStrings.length; i++){
-            s += finalStrings[i];
-            s += '\n';
-        }
-
-        return s;
+        for(int i = 0; i < final.length; i++)
+            str += final[i] + "\n"; // concatena string final
+        
+        return str;
     }
 
     public static void main(String args[]){

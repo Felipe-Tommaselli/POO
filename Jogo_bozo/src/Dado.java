@@ -40,7 +40,7 @@ public class Dado{
     /**
      * Simula a rolagem do dado por meio de um gerador aleatório.
      * @return o número que foi sorteado
-     */
+    */
     public int rolar(){
         this.num_rolado = this.rand.getIntRand(this.faces);
         this.num_rolado++;
