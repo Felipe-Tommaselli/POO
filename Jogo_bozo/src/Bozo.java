@@ -29,12 +29,13 @@ public class Bozo{
     */
     private static int leInt2(){
         try{
-            return EntradaTeclado.leInt();
+            int k = (int) EntradaTeclado.leInt();
+            return  k;
         }
         catch(Exception e){
             System.out.println("Entrada invalida!");
         }
-    
+        return -1;
     }
 
     /**
@@ -55,32 +56,35 @@ public class Bozo{
 
         for(int rodada = 1; rodada <= 10; rodada++){
             
-            String enter = " "; // inicia com valor qualquer
-
-            System.out.println(" Rodada " + rodada);
-            while(enter != ""){
-                System.out.println("Pressione ENTER para lançar os dados");
-                enter = leString2();
-            }
-
-            int[] rolagemDados = new int[5];
-            rolagemDados = dados.rolar();
+            String limpaBuffer;
+            String enter = "*"; // inicia com valor qualquer
             
+            System.out.println(" Rodada " + rodada);
+            do{
+                System.out.println("\nPressione ENTER duas vezes para lançar os dados");
+                limpaBuffer = leString2();
+                enter = leString2();
+                
+            } while(enter != "");
+
+            int[] rolagDados = new int[5];
+            rolagDados = dados.rolar();
+            System.out.println(dados);
+
             for(int i = 0; i < 2; i++){
                 System.out.println("Solicite os números dos dados que quiser trocar, separados por espaços");
                 String str = leString2();
-                rolagemDados = dados.rolar(str);
+                rolagDados = dados.rolar(str);
                 System.out.println(dados);
             }
 
-            System.out.println(dados);
             System.out.println(placar);
             System.out.print("Escolha a posição que será ocupada com essa jogada: ");
             
             int pos = -5; // valor aleatorio para incialização
             pos = leInt2();
 
-            placar.add(pos, rolagemDados);
+            placar.add(pos, rolagDados);
             System.out.println("\n" + placar);
         }
 

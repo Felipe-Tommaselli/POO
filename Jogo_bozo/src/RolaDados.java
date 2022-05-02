@@ -77,18 +77,19 @@ public class RolaDados {
      */
     public int[] rolar(String s){
         // utilização de regular expressions para limpar o numero da string
-        String numStr[] = s.replaceAll("[^1-" + this.num + "]+", " "); // !
-        numStr = numStr.trim();
-        numStr = numStr.split(" ");
+        String auxStr = s.replaceAll("[^1-" + this.num + "]+", " ").trim();
+        String ParsingStr[] = auxStr.split(" ");
+        String numStr = ParsingStr[0];
+        
 
-        if(!numStr[0].isEmpty())
-        for(int i = 0; i < numStr.length; i++){
-            int dado = parseInt(numStr[i]);
-            dado--;
-            if(dado >= 0 && dado <= this.num) // 0 a 6 do dado padrão
-                this.resultado[dado] = lista[dado].rolar();
-        }
-        return this.resultado;
+        if(!numStr.isEmpty())
+            for(int i = 0; i < ParsingStr.length; i++){
+                int numInt = parseInt(ParsingStr[i]);
+                numInt--;
+                if(numInt >= 0 && numInt <= this.num) // 1 a 6 do dado padrão
+                    this.resultado[numInt] = lista[numInt].rolar();
+            }
+            return this.resultado;
     }
 
     /**
@@ -98,23 +99,20 @@ public class RolaDados {
     @Override
     public String toString(){
         
-        String[] final = new String[5];
-        String str = "1      2      3       4       5\n";
+        String finalStr[] = new String[5];
+        String str = "1         2         3          4          5\n";
 
-        Arrays.fill(final, "");
-        
-
+        Arrays.fill(finalStr, "");
         for(int i = 0; i < lista.length; i++){
-            String[] str2 = lista[i];
-            str2 = str2.toString();
-            str2 = str2.split("\n");
+            String str2 = lista[i].toString();
+            String listaStr[] = str2.split("\n");
             
-            for(int j = 0; j < str2.length; j++)
-                final[j] += (str2[j] + "   ");
+            for(int j = 0; j < listaStr.length; j++)
+                finalStr[j] += (listaStr[j] + "   ");
         }
         
-        for(int i = 0; i < final.length; i++)
-            str += final[i] + "\n"; // concatena string final
+        for(int i = 0; i < finalStr.length; i++)
+            str += finalStr[i] + "\n"; // concatena string finalStr
         
         return str;
     }
