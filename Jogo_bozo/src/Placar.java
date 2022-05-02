@@ -1,5 +1,6 @@
 /**
- *
+ * Esta classe representa o placar de um jogo de Bozó. 
+ * Permite que combinações de dados sejam alocadas às posições e mantém o escore de um jogador.
  * @author 11800910
  */
 
@@ -17,7 +18,12 @@ public class Placar {
             this.scoreValues = new int[10];
             Arrays.fill(this.scoreValues, -1);
         }
-    
+        
+        /**
+         * Adiciona uma sequencia de dados em uma determinada posição do placar.
+         * @param posicao
+         * @param dados
+         */
         public void add(int posicao, int[] dados) {
             int posicaoVector = posicao - 1;
             int freq[] = new int[6];
@@ -112,7 +118,11 @@ public class Placar {
                 }
             }
         }
-    
+        
+        /**
+         * Computa a soma dos valores obtidos, considerando apenas as posições que já estão ocupadas.
+         * @return
+         */
         public int getScore() {
             int score = 0;
             for(int i = 0; i < this.scoreValues.length; i++) {
@@ -121,7 +131,12 @@ public class Placar {
     
             return score;
         }
-    
+        
+        /**
+         * A representação na forma de string, mostra o placar completo, indicando quais são as posições livres (com seus respectivos números) e o valor obtido nas posições já ocupadas.
+         * @param posicao
+         * @return
+         */
         private String scoreToPrint(int posicao) {
             int posicaoScore = this.scoreValues[posicao - 1];
     
@@ -140,6 +155,10 @@ public class Placar {
             }
         }
     
+        /**
+        * Transforma representação do dado em String.
+        * Override no toString default
+        */
         @Override
         public String toString() {
             String s = new String("");

@@ -41,7 +41,7 @@ public class Dado {
 
     /**
      * Transforma representação do dado em String.
-     * Override no toString default 
+     * Override no toString default
      */
     @Override
     public String toString(){

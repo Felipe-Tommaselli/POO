@@ -1,5 +1,6 @@
 /**
- *
+ * Essa é uma classe auxiliar que permite gerencia um conjunto de vários dados simultaneamente. 
+ * Operações como rolar alguns dos dados ou exibir o resultado de todos eles, são implementadas.
  * @author 11800910
  */
 import static java.lang.Integer.*;
@@ -33,6 +34,10 @@ public class RolaDados {
         }
     }
 
+    /**
+     * Rola todos os dados.
+     * @return
+     */
     public int[] rolar() {
         for(int i = 0; i < this.numeroDados; i++) {
             this.rolagemResult[i] = listaDados[i].rolar();
@@ -41,6 +46,11 @@ public class RolaDados {
         return this.rolagemResult;
     }
 
+    /**
+     * Rola alguns dos dados.
+     * @param quais
+     * @return
+     */
     public int[] rolar(boolean[] quais) {
         for(int i = 0; i < this.numeroDados; i++) {
             if(quais[i]) {
@@ -51,6 +61,11 @@ public class RolaDados {
         return this.rolagemResult;
     }
 
+    /**
+     * Rola alguns dos dados.
+     * @param s
+     * @return
+     */
     public int[] rolar(String s) {
         String numbersInString[] = s.replaceAll("[^1-" + this.numeroDados + "]+", " ").trim().split(" ");
 
@@ -65,6 +80,10 @@ public class RolaDados {
         return this.rolagemResult;
     }
 
+    /**
+     * Usa a representação em string do dados, para mostrar o valor de todos os dados do conjunto.
+     * Override no toString default
+     */
     @Override
     public String toString() {
         String[] finalStrings = new String[5];
