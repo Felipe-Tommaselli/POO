@@ -1,5 +1,3 @@
-
-
 /**
  * Simula um dado de número de ladostr variados. Ao criar o objeto é possível estabelecer o número de lados. 
  * A rolagem do dado é feita por meio de um gerador de númerostr aleatóriostr (Random).

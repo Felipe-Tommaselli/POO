@@ -117,6 +117,9 @@ public class RolaDados {
         return str;
     }
 
+    /**
+     * Não tem função real dentro da classe.
+     */
     public static void main(String args[]){
 
     }

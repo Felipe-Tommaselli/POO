@@ -1,10 +1,10 @@
+import java.util.Arrays;
+
 /**
  * Esta classe representa o placar de um jogo de Bozó. 
  * Permite que combinações de dados sejam alocadas às posições e mantém o escore de um jogador.
  * @author 11800910
  */
-
-import java.util.Arrays;
 
 public class Placar{
         /*
