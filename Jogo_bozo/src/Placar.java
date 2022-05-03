@@ -2,116 +2,102 @@ import java.util.Arrays;
 
 /**
  * Esta classe representa o placar de um jogo de Bozó. 
- * Permite que combinações de dados sejam alocadas às posições e mantém o escore de um jogador.
+ * Permite que combinaçõestr de dadostr sejam alocadastr àstr posiçõestr e mantém o escore de um jogador.
  * @author 11800910
  */
 
 public class Placar{
-        /*
-        OBS: adaptações para vetor baseado em 0.
-        Posições do tabuleiro (0 a 5 e posições especiais)
-        6 - full; 7 - seq.; 8 - quadra; 9 - quina;
-        */
         private int[] placar_valor;
-    
+
+        /**
+         * Construtor do placar, setando todas as posições com -1
+         */
         public Placar(){
             this.placar_valor = new int[10];
-            Arrays.fill(this.placar_valor, -1);
+            for(int i = 0; i < 10; i++)
+                this.placar_valor[i] = -1;
         }
         
         /**
-         * Adiciona uma sequencia de dados em uma determinada posição do placar.
+         * Adiciona uma sequencia de dadostr em uma determinada posição do placar.
          * @param posicao
          * @param dados
          */
-        public void add(int posicao, int[] dados){
-            int posicaoVector = posicao - 1;
-            int freq[] = new int[6];
-            Arrays.fill(freq, 0);
-    
-            if(this.placar_valor[posicaoVector] == -1){
-                for(int i = 0; i < dados.length; i++){
-                    freq[dados[i] - 1]++;
-                }
+        public void add(int posicao, int[] dados) throws java.lang.IllegalArgumentException{
+            int pos = posicao - 1;
+            int valor[] = new int[6];
+            boolean tem3 = false;
+            boolean tem2 = false;
+            boolean tem5 = false;
+
+            for(int i = 0; i < 6; i++)
+                valor[i] = 0;
+                
+            if(this.placar_valor[pos] == -1){ // vazio
+
+                for(int i = 0; i < dados.length; i++)
+                    valor[dados[i] - 1]++;
+                
         
                 if(posicao >= 1 && posicao <= 6){
-                    this.placar_valor[posicaoVector] = freq[posicaoVector]*posicao;
+                    this.placar_valor[pos] = valor[pos];
+                    this.placar_valor[pos] *= posicao;
                 }
                 
                 switch(posicao){
                     case 7:
-                        boolean hasThreeFlag = false;
-                        boolean hasTwoFlag = false;
-                        boolean hasFiveFlag = false;
-    
-                        for(int i = 0; i < freq.length; i++){
-                            if(freq[i] == 3)
-                                hasThreeFlag = true;
-    
-                            if(freq[i] == 2)
-                                hasTwoFlag = true;
-    
-                            if(freq[i] == 5)
-                                hasFiveFlag = true;
+                        for(int i = 0; i < valor.length; i++){
+                            if(valor[i] == 3)
+                                tem3 = true;
+                            if(valor[i] == 2)
+                                tem2 = true;
+                            if(valor[i] == 5)
+                                tem5 = true;
                         }
     
-                        if((hasThreeFlag && hasTwoFlag) || hasFiveFlag){
+                        if((tem3 && tem2) || tem5){
                             this.placar_valor[6] = 15;
                         }
                         else {
                             this.placar_valor[6] = 0;
                         }
-    
+
                         break;
     
                     case 8:
-                        if(freq[0] == 1 && 
-                            freq[1] == 1 &&
-                            freq[2] == 1 &&
-                            freq[3] == 1 &&
-                            freq[4] == 1){
-    
+                        if(valor[0] == 1 && valor[1] == 1 && valor[2] == 1 && valor[3] == 1 && valor[4] == 1)
                             this.placar_valor[7] = 20;
-                        }
-                        else if(freq[1] == 1 && 
-                                freq[2] == 1 &&
-                                freq[3] == 1 &&
-                                freq[4] == 1 &&
-                                freq[5] == 1){
-    
+                        
+                        else if(valor[1] == 1 && valor[2] == 1 && valor[3] == 1 && valor[4] == 1 && valor[5] == 1)
                             this.placar_valor[7] = 20;
-                        }
-                        else {
+                        else
                             this.placar_valor[7] = 0;
-                        }
                         break;
     
-                    case 9: {
-                        boolean flag = false;
-                        for(int i = 0; i < freq.length; i++){
-                            if(freq[i] == 4){
+                    case 9:{
+                        boolean sel = false;
+                        for(int i = 0; i < valor.length; i++){
+                            if(valor[i] == 4){
                                 this.placar_valor[8] = 30;
-                                flag = true;
+                                sel = true;
                                 break;
                             }
                         }
-    
-                        if(!flag)
+                        if(sel == false)
                             this.placar_valor[8] = 0;
                     }
                         break;
     
-                    case 10: {
-                        boolean flag = false;
-                        for(int i = 0; i < freq.length; i++){
-                            if(freq[i] == 5){
+                    case 10:{
+                        boolean sel = false;
+                        for(int i = 0; i < valor.length; i++){
+                            if(valor[i] == 5){
                                 this.placar_valor[9] = 40;
-                                flag = true;
+                                sel = true;
                                 break;
                             }
                         }
-    
-                        if(!flag)
+                        if(!sel)
                             this.placar_valor[9] = 0;
                     }
                         break;
@@ -120,7 +106,7 @@ public class Placar{
         }
         
         /**
-         * Computa a soma dos valores obtidos, considerando apenas as posições que já estão ocupadas.
+         * Computa a soma dostr valorestr obtidos, considerando apenastr astr posiçõestr que já estão ocupadas.
          * @return O valor da soma.
          */
         public int getScore(){
@@ -132,70 +118,43 @@ public class Placar{
             return score;
         }
         
-        /**
-         * A representação na forma de string, mostra o placar completo, indicando quais são as posições livres (com seus respectivos números) e o valor obtido nas posições já ocupadas.
-         * @param posicao
-         * @return
-         */
-        private String scoreToPrint(int posicao){
-            int posicaoScore = this.placar_valor[posicao - 1];
-    
-            if(posicaoScore == -1){
-                return "(" + posicao + ")";
-            }
-            else {
-                String s = new String("");
-                s += posicaoScore + "";
-                if(posicaoScore < 10)
-                    s += "  ";
-                else
-                    s += " ";
-    
-                return s;
-            }
-        }
     
         /**
-        * Transforma representação do dado em String.
+        * A representação na forma de string, mostra o placar completo, indicando quaistr são astr posiçõestr livrestr (com seustr respectivostr números) e o valor obtido nastr posiçõestr já ocupadas.
         * Override no toString default
+        * @return str
         */
         @Override
         public String toString(){
-            String s = new String("");
-    
-            s += scoreToPrint(1);
-            s += "    |   ";
-            s += scoreToPrint(7);
-            s += "    |   ";
-            s += scoreToPrint(4);
-            s += " \n";
-    
-            s += "--------------------------\n";
-    
-            s += scoreToPrint(2);
-            s += "    |   ";
-            s += scoreToPrint(8);
-            s += "    |   ";
-            s += scoreToPrint(5);
-            s += " \n";
-    
-            s += "--------------------------\n";
-    
-            s += scoreToPrint(3);
-            s += "    |   ";
-            s += scoreToPrint(9);
-            s += "    |   ";
-            s += scoreToPrint(6);
-            s += " \n";
-    
-            s += "--------------------------\n";
-    
-            s += "       |   ";
-            s += scoreToPrint(10);
-            s += "    |\n";
-    
-            s+= "       +----------+\n";
-        
-            return s;
+            String str = new String("");
+            String[] tabela = new String[11];
+
+            for(int i = 1; i <= 10; i++){
+                int posScore = this.placar_valor[i - 1];
+
+                if(posScore == -1)
+                    tabela[i] = "(" + i + ")";
+                else{
+                    String strAux = new String("");
+                    strAux += posScore + "";
+                    if(posScore < 10)
+                        strAux += "  ";
+                    else
+                        strAux += " ";
+                    
+                    tabela[i] = strAux;
+                    
+                }
+            }
+
+            str = " " + tabela[1] + "    |   " + tabela[7] + "    |   " + tabela[4] + "\n";
+            str += "--------------------------\n";
+            str += " " + tabela[2] + "    |   " + tabela[8] + "    |   " + tabela[5] + "\n";
+            str += "--------------------------\n";
+            str += " " + tabela[3] + "    |   " + tabela[9] + "    |   " + tabela[6] + "\n";
+            str += "--------------------------\n";
+            str += "        |   " + tabela[10] + "   |\n";
+            str += "        +----------+ ";
+            return str;
         }
     }
