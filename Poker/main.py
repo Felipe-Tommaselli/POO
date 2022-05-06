@@ -13,8 +13,9 @@ class TelePoker():
         print(self)
 
 
+def main():
+    print(cartas.Cartas())
+
 
 if __name__ == '__main__':
-    print(cartas.Cartas())
-    
-    print('classe main')
+    main()
