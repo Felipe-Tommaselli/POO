@@ -1,4 +1,5 @@
-import Cartas as cartas
+from Cartas import *
+from AbreCartas import *
 
 '''
 
@@ -7,15 +8,11 @@ import Cartas as cartas
 
 '''
 
-class TelePoker():
-
-    def __init__(self):
-        print(self)
-
-
 def main():
-    print(cartas.Cartas())
-
+    jogo = AbreCartas(5)
+    jogo.abrir()
+    print(jogo, end='')
+    print("  (1)       (2)       (3)       (4)       (5)");
 
 if __name__ == '__main__':
     main()

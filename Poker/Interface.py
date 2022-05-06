@@ -1,4 +1,6 @@
 import sys
+from Cartas import *
+from AbreCartas import *
 saldo = 200
 
 '''
@@ -19,8 +21,12 @@ class Interface(object):
     def __init__(self) -> None:
         print(f'Saldo atual: {saldo}')
         print(f'Digite o valor da aposta ou "F" para finalizar: ', end='')
-        foi = False
         self.entrada = 0
+        self.EntradaTeclado()
+
+
+    def EntradaTeclado(self):
+        foi = False
         while(foi != True):
             try:
                 self.entrada = input()
@@ -34,11 +40,18 @@ class Interface(object):
                 print(f'\nEntrada invalida ({ve})\nDigite denovo: ', end='')
             except EntradaError:
                 print(f'\nEntrada invalida (Valor não está entre 0 e {saldo})\nDigite denovo: ', end='')
-            
 
         print(self.entrada)
 
 
 
 
-i = Interface()
+def main():
+    Interface()
+    jogo = AbreCartas(5)
+    jogo.abrir()
+    print(jogo, end='')
+    print("  (1)       (2)       (3)       (4)       (5)");
+
+if __name__ == '__main__':
+    main()

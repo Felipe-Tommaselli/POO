@@ -50,8 +50,8 @@ class AbreCartas:
 	
 if __name__ == '__main__':
 	jogo = AbreCartas()
-	print(jogo)
-	print(jogo.abrir())
+	print('jogo:\n', jogo)
+	print('jogo.abrir()', jogo.abrir())
 	print(jogo)
 	jogo = AbreCartas(3)
 	print(jogo)
