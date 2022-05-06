@@ -17,7 +17,7 @@ class RolaDados:
 			for d in self.dados:
 				p = str(d)
 				s += p[base:base+7]
-				s += "    "
+				s += "   "
 			s += '\n'
 		return s
 	
