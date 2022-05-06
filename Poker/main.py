@@ -1,3 +1,5 @@
+import Cartas as cartas
+
 '''
 
 
@@ -12,18 +14,7 @@ class TelePoker():
 
 
 
-class Cartas():
-
-    num = 5
-    nipe = 'W'
-
-    def printCartas(num, nipe):
-        str =  '+-----+'
-        str += '|     |'
-        str += f'|  {num} {nipe}  |'
-        str += '|     |'
-        str +=  '+-----+'
-
-
 if __name__ == '__main__':
+    print(cartas.Cartas())
+    
     print('classe main')
