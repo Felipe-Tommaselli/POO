@@ -1,5 +1,6 @@
 from Cartas import *
 from AbreCartas import *
+from Interface import *
 
 '''
 
@@ -9,6 +10,7 @@ from AbreCartas import *
 '''
 
 def main():
+    Interface()
     jogo = AbreCartas(5)
     jogo.abrir()
     print(jogo, end='')

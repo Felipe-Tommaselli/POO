@@ -44,8 +44,6 @@ class Interface(object):
         print(self.entrada)
 
 
-
-
 def main():
     Interface()
     jogo = AbreCartas(5)
