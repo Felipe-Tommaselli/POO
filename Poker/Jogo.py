@@ -29,7 +29,7 @@ def puxaError(entrada, sel):
         if entrada > 5 or entrada < 1:
             raise TrocaError()
 
-class Interface(object):
+class Jogo(object):
 
     def __init__(self) -> None:
         print(f'Saldo atual: {saldo}')
@@ -42,14 +42,12 @@ class Interface(object):
         jogo.abrir()
         print(jogo, end='')
         print("  (1)       (2)       (3)       (4)       (5)");
-        time.sleep(0.5)
-
+        
         self.TrocarJogo()
 
         jogo.abrir(self.troca)
 
         print(jogo, end='')
-        print(self.troca)
 
     def EntradaTeclado(self):
         foi = False
@@ -92,7 +90,7 @@ class Interface(object):
 
 
 def main():
-    Interface()
+    Jogo()
 
 if __name__ == '__main__':
     main()

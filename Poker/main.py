@@ -1,16 +1,17 @@
 from Cartas import *
 from AbreCartas import *
-from Interface import *
+from Jogo import *
 
 '''
-
-
 * @author: 11800910
-
 '''
 
 def main():
-    Interface()
+    
+    while saldo != 0:
+        i = Jogo()
+        print('>>>>>', i.troca)
+
 
 
 if __name__ == '__main__':
