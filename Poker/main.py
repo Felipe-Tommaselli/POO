@@ -10,6 +10,7 @@ def main():
     saldo = 200
     while saldo != 0:
         j = Jogo(saldo)
+        saldo -= j.aposta
         p = Pontos(saldo, j.aposta, j.cartasList)
         saldo = p.saldo 
 
