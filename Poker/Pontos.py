@@ -31,7 +31,7 @@ class Pontos(object):
         print("GANHO: ", ganho)
         self.saldo += ganho*aposta
 
-    def rsf(self):
+    def rsf(self) -> bool:
         if self.s() == True:
             if self.flush() == True:
                 for e in self.cartas:
@@ -40,7 +40,7 @@ class Pontos(object):
 
         return False
 
-    def sf(self):
+    def sf(self) -> bool:
         if self.s() == True:
             if self.flush() == True:
                 return True
@@ -48,7 +48,7 @@ class Pontos(object):
         return False
 
     
-    def quadra(self):
+    def quadra(self) -> bool:
 
         nums = [e[0] for e in self.cartas]
         for num in nums:
@@ -57,7 +57,7 @@ class Pontos(object):
 
         return False
 
-    def fh(self):
+    def fh(self) -> bool:
         if self.trinca() == True:
             nums = [e[0] for e in self.cartas]
             for num in nums:
@@ -66,7 +66,7 @@ class Pontos(object):
         
         return False
 
-    def flush(self):
+    def flush(self) -> bool:
         e0 = self.cartas[0]
         e1 = self.cartas[1]
         e2 = self.cartas[2]
@@ -77,7 +77,7 @@ class Pontos(object):
         
         return False
 
-    def s(self):
+    def s(self) -> bool:
         nums = list()
         for e in self.cartas:
             if e[0] == 'J':

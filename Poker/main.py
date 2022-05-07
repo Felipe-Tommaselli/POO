@@ -12,8 +12,9 @@ def main():
         j = Jogo(saldo)
         saldo -= j.aposta
         p = Pontos(saldo, j.aposta, j.cartasList)
-        saldo = p.saldo 
-
+        saldo = p.saldo
+    
+    print('\nVocê perdeu :(')
 
 
 if __name__ == '__main__':
