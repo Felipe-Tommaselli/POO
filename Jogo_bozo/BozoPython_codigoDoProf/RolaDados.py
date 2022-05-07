@@ -3,7 +3,6 @@ import time
 
 class RolaDados:
 
-
 	def __init__(self, n = 5):
 		self.dados = []
 		for i in range(n):

@@ -1,7 +1,6 @@
 import sys
 from Cartas import *
 from AbreCartas import *
-saldo = 200
 
 '''
 tratametno da exceção de forma mais legível, EntradaError e TrocaError
@@ -18,7 +17,7 @@ class TrocaError(Exception):
 def puxaError(entrada, sel):
     # seleciona o erro de entrada [0, saldo]
     if sel == 0:
-        if entrada > saldo or entrada < 0:
+        if entrada > self.saldo or entrada < 0:
             raise EntradaError()
     # seleciona o erro de numero de elementos para trocar [0, 3]
     elif sel == 1:
@@ -32,21 +31,21 @@ def puxaError(entrada, sel):
 class Jogo(object):
 
     def __init__(self) -> None:
-        print(f'Saldo atual: {saldo}')
-        print(f'Digite o valor da aposta ou "F" para finalizar: ', end='')
         self.aposta = 0
         self.troca = list()
+        self.saldo = 200
+                
+        print(f'Saldo atual: {self.saldo}')
+        print(f'Digite o valor da aposta ou "F" para finalizar: ', end='')
         self.EntradaTeclado()
-        
+
         jogo = AbreCartas(5)
         jogo.abrir()
         print(jogo, end='')
         print("  (1)       (2)       (3)       (4)       (5)");
         
         self.TrocarJogo()
-
         jogo.abrir(self.troca)
-
         print(jogo, end='')
 
     def EntradaTeclado(self):
@@ -67,7 +66,7 @@ class Jogo(object):
             except ValueError as ve:
                 print(f'\nEntrada invalida ({ve})\nDigite denovo: ', end='')
             except EntradaError:
-                print(f'\nEntrada invalida (Valor não está entre 0 e {saldo})\nDigite denovo: ', end='')
+                print(f'\nEntrada invalida (Valor não está entre 0 e {self.saldo})\nDigite denovo: ', end='')
 
 
     def TrocarJogo(self):
