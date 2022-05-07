@@ -37,13 +37,14 @@ class AbreCartas:
 	# troca os dados retornados acima
 	# [True, False, False, True, True] -> trocar 1, 4 e 5
 	def abrir_boolean(self, quais = []):
+		print(quais)
 		aux = []
 		i = 0
-		for pl in quais:
+		for q in quais:
 			if i > len(self.cartas):
 				break
-			if pl:
-				self.cartas[i- 1].sortear()
+			if q:
+				self.cartas[i].sortear()
 			aux.append(self.cartas[i].getValor()[0])
 			i += 1
 		return aux

@@ -14,14 +14,14 @@ class EntradaError(Exception):
 class TrocaError(Exception):
     pass
 
-def puxaError(entrada, sel):
+def puxaError(entrada, saldo, sel):
     # seleciona o erro de entrada [0, saldo]
     if sel == 0:
-        if entrada > self.saldo or entrada < 0:
+        if entrada > saldo or entrada < 0:
             raise EntradaError()
     # seleciona o erro de numero de elementos para trocar [0, 3]
     elif sel == 1:
-        if entrada > 3 or entrada < 0:
+        if entrada > 5 or entrada < 0:
             raise TrocaError()
     # seleciona o erro de carta escolhida para trocar [1, 5]
     else:
@@ -30,20 +30,28 @@ def puxaError(entrada, sel):
 
 class Jogo(object):
 
-    def __init__(self) -> None:
+    def __init__(self, saldo) -> None:
         self.aposta = 0
         self.troca = list()
-        self.saldo = 200
-                
+        self.saldo = saldo
+
+        # cabeçalho, pega aposta    
         print(f'Saldo atual: {self.saldo}')
         print(f'Digite o valor da aposta ou "F" para finalizar: ', end='')
         self.EntradaTeclado()
 
+        # abre as cartas
         jogo = AbreCartas(5)
         jogo.abrir()
         print(jogo, end='')
         print("  (1)       (2)       (3)       (4)       (5)");
         
+        # permite primeira troca
+        self.TrocarJogo()
+        jogo.abrir(self.troca)
+        print(jogo, end='')
+
+        # permite segunda troca
         self.TrocarJogo()
         jogo.abrir(self.troca)
         print(jogo, end='')
@@ -61,7 +69,7 @@ class Jogo(object):
                 # tipagem para int
                 self.aposta = int(self.aposta)
                 # verifica se o erro está no intervalo correto
-                puxaError(self.aposta, 0)
+                puxaError(self.aposta, self.saldo, 0)
                 foi = True
             except ValueError as ve:
                 print(f'\nEntrada invalida ({ve})\nDigite denovo: ', end='')
@@ -72,15 +80,16 @@ class Jogo(object):
     def TrocarJogo(self):
         foi = False
         msg = 'Digite o número de cartas que deseja trocar, separado por espaços: '
+        (self.troca).clear()
         while(foi != True):
             try:
                 # passa a entrada "1 4 5" para [1, 4, 5]
                 self.troca =  list(map(int, input(msg).split(' ')))
-                # trocar no minimo 0 e no maximo 3 cartas
-                puxaError(len(self.troca), 1)
+                # trocar no minimo 0 e no maximo 5 cartas
+                puxaError(len(self.troca), self.saldo, 1)
                 # numero de cartas tem que estar entre 0 e 5
                 for i in range(0, len(self.troca)):
-                    puxaError(self.troca[i], 2)
+                    puxaError(self.troca[i], self.saldo, 2)
                 foi = True
             except ValueError as ve:
                 print(f'\nEntrada invalida ({ve})\n', end='')
