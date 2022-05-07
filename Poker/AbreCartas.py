@@ -5,8 +5,11 @@ class AbreCartas:
 
 	def __init__(self, n = 5):
 		self.cartas = list()
+		self.cartasList = list()
 		for i in range(n):
-			self.cartas.append(cartas.Cartas())
+			obj = cartas.Cartas()
+			self.cartasList.append(obj.valor_att)
+			self.cartas.append(obj)
 			time.sleep(0.5)
 			
 	def __str__(self):
@@ -37,7 +40,6 @@ class AbreCartas:
 	# troca os dados retornados acima
 	# [True, False, False, True, True] -> trocar 1, 4 e 5
 	def abrir_boolean(self, quais = []):
-		print(quais)
 		aux = []
 		i = 0
 		for q in quais:

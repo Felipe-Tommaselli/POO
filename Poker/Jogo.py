@@ -34,6 +34,7 @@ class Jogo(object):
         self.aposta = 0
         self.troca = list()
         self.saldo = saldo
+        self.cartasList = list()
 
         # cabeçalho, pega aposta    
         print(f'Saldo atual: {self.saldo}')
@@ -55,6 +56,8 @@ class Jogo(object):
         self.TrocarJogo()
         jogo.abrir(self.troca)
         print(jogo, end='')
+
+        self.cartasList = jogo.cartasList
 
     def EntradaTeclado(self):
         foi = False
