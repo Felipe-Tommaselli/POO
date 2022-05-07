@@ -1,5 +1,6 @@
 import Random as rd
 
+# gabarito das cartas do poker
 simbol = {
     0:  '2',
     1:  '3',
@@ -16,6 +17,7 @@ simbol = {
     12: 'A'
 }
 
+# gabarito de naipes disponiveis
 naipes = {
     0: '♣',
     1: '♠',
@@ -25,30 +27,42 @@ naipes = {
 
 class Cartas(object):
 
+    # construtor com os parametros da carta
     def __init__(self) -> None:
         self.rd = rd.Random()
         self.valor_att = ['A', '♣']
         self.sortear()
 
-        
+    
+    # constrói a formatação de string
     def __str__(self) -> str:
-        valor = self.getValor()[0]
-        naipe = self.getValor()[1]
+        # pega o valor e naipe retornado pelo getvalor
+        valor = str(self.getValor()[0])
+        naipe = str(self.getValor()[1])
         
-        str =  f'+-----+\n'
-        str += f'|     |\n'
-        str += f'| {valor} {naipe} |\n'
-        str += f'|     |\n'
-        str += f'+-----+\n'
+        # corrigir formatação do 10
+        if valor != '10':
+            valor += ' '
+        
+        # monta as cartas
+        st =  f'+-----+\n'
+        st += f'|     |\n'
+        st += f'| {valor}{naipe} |\n'
+        st += f'|     |\n'
+        st += f'+-----+\n'
 
-        return str
+        return st
 
+    # sorteia um valor e um naipe para a carta
     def sortear(self):
+        # atribui lista valor_att o valor e o naipe da carta
+        # utiliza o gabrito "simbol" e "naipes" referenciado acima
         self.valor_att[0] = simbol[self.rd.getIntRand(13)]
         self.valor_att[1] = naipes[self.rd.getIntRand(4)]        
         return self.valor_att
         
 
+    # envia o proprio valor
     def getValor(self):
         return self.valor_att
 
