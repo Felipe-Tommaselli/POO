@@ -3,17 +3,21 @@ from Cartas import *
 from AbreCartas import *
 
 '''
-tratametno da exceção de forma mais legível, EntradaError e TrocaError
-herdam todas as exceções e criam esses novos erros, enquanto 
-puxaError apenas coloca a condiçaõ que deve levantar
-o erro, tornando o código menos poluido
+* Código com o intuito de criar o Jogo de cartas, ou seja, apresentar o cabeçalho,
+* dar as cartas, trocar as cartas e passar o resultado para a main. Vale ressaltar
+* que esse código procura tratar da melhor forma os bad inputs do usuario
 '''
+
+# tratametno da exceção de forma mais legível, EntradaError e TrocaError
+# herdam todas as exceções e criam esses novos erros, enquanto 
 class EntradaError(Exception):
     pass
 
 class TrocaError(Exception):
     pass
 
+# puxaError apenas coloca a condiçaõ que deve levantar
+# o erro, tornando o código menos poluido
 def puxaError(entrada, saldo, sel):
     # seleciona o erro de entrada [0, saldo]
     if sel == 0:
@@ -30,6 +34,7 @@ def puxaError(entrada, saldo, sel):
 
 class Jogo(object):
 
+    # construtor principal
     def __init__(self, saldo) -> None:
         self.aposta = 0
         self.troca = list()
@@ -37,7 +42,7 @@ class Jogo(object):
         self.cartasList = list()
 
         # cabeçalho, pega aposta    
-        print(f'Saldo atual: {self.saldo}')
+        print(f'Saldo atual: ${self.saldo}')
         print(f'Digite o valor da aposta ou "F" para finalizar: ', end='')
         self.EntradaTeclado()
 
@@ -57,8 +62,12 @@ class Jogo(object):
         jogo.abrir(self.troca)
         print(jogo, end='')
 
+        # passa a lista de cartas que estava relacionada ao jogo para a classe
+        # esse é um jeito fácil de conseguir acessar essa lista a partir da main
         self.cartasList = jogo.cartasList
 
+    # função com o objetivo de pegar a entrada do teclado (nesse caso a APOSTA)
+    # tentei fazer o tratamento de erro da melhor forma que consegui
     def EntradaTeclado(self):
         foi = False
         while(foi != True):
@@ -79,7 +88,8 @@ class Jogo(object):
             except EntradaError:
                 print(f'\nEntrada invalida (Valor não está entre 0 e {self.saldo})\nDigite denovo: ', end='')
 
-
+    # função com o objetivo de pegar a entrada do teclado (nesse caso a TROCA)
+    # tentei fazer o tratamento de erro da melhor forma que consegui
     def TrocarJogo(self):
         foi = False
         msg = 'Digite o número de cartas que deseja trocar, separado por espaços: '

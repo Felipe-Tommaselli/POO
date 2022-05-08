@@ -28,8 +28,11 @@ class Pontos(object):
         else:
             ganho = 0
         
-        print("GANHO: ", ganho)
         self.saldo += ganho*aposta
+        if ganho == 0:
+            print('Infelizmente você não ganhou nada essa rodada')
+        else:
+            print(f'Parabéns! Você ganhou ${ganho*aposta}')
 
     def rsf(self) -> bool:
         if self.s() == True:
