@@ -6,6 +6,7 @@ from AbreCartas import *
 * Código com o intuito de criar o Jogo de cartas, ou seja, apresentar o cabeçalho,
 * dar as cartas, trocar as cartas e passar o resultado para a main. Vale ressaltar
 * que esse código procura tratar da melhor forma os bad inputs do usuario
+* @author: 11800910
 '''
 
 # tratametno da exceção de forma mais legível, EntradaError e TrocaError

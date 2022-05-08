@@ -4,6 +4,7 @@ import Random as rd
 * Código que cria UMA carta, que será usado para criar todos as cartas do jogo.
 * A ideia principal é sortear os atributos da carta e entregar a carta pronta para
 * o resto do programa
+* @author: 11800910
 '''
 
 

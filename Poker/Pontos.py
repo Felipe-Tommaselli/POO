@@ -2,12 +2,25 @@ from Cartas import *
 from AbreCartas import *
 from Jogo import *
 
+'''
+* Código feito para estabelecer a pontuação a partir de um jogo
+* para clareza do código optei por fazer essa classe um pouco separada
+* das outras, recebendo como parametros as informações do jogo. Com
+* essas informações essa classe analisa a melhor pontuação conseguida com
+* o jogo dado, retornando o saldo atualizado já
+* @author: 11800910
+'''
+
 class Pontos(object):
 
+    # construtor que a partir dos parametros recebidos, 
+    # checa caso a caso a melhor pontuação que o jogo dado
+    # fornece, atualizando o saldo no fim
     def __init__(self, saldo, aposta, cartas: list()):
         self.saldo = saldo
         self.cartas = cartas
 
+        # checa 1 a 1
         ganho = 0
         if self.rsf() == True:
             ganho = 200
@@ -28,12 +41,14 @@ class Pontos(object):
         else:
             ganho = 0
         
+        # resultado da pontuação
         self.saldo += ganho*aposta
         if ganho == 0:
             print('Infelizmente você não ganhou nada essa rodada')
         else:
             print(f'Parabéns! Você ganhou ${ganho*aposta}')
 
+    # Royal Straight Flush (5 cartas seguidas do mesmo naipe de 10 até o As)
     def rsf(self) -> bool:
         if self.s() == True:
             if self.flush() == True:
@@ -43,6 +58,7 @@ class Pontos(object):
 
         return False
 
+    # Straight Flush (5 cartas seguidas do mesmo naipe)
     def sf(self) -> bool:
         if self.s() == True:
             if self.flush() == True:
@@ -50,7 +66,7 @@ class Pontos(object):
 
         return False
 
-    
+    # Quadra 
     def quadra(self) -> bool:
 
         nums = [e[0] for e in self.cartas]
@@ -60,6 +76,7 @@ class Pontos(object):
 
         return False
 
+    # Full hand (uma trinca e um par) 
     def fh(self) -> bool:
         if self.trinca() == True:
             nums = [e[0] for e in self.cartas]
@@ -69,6 +86,7 @@ class Pontos(object):
         
         return False
 
+    # Flush (5 cartas do mesmo naipe não seguidas)
     def flush(self) -> bool:
         e0 = self.cartas[0]
         e1 = self.cartas[1]
@@ -80,6 +98,7 @@ class Pontos(object):
         
         return False
 
+    # Straight (5 cartas seguidas de naipes diferentes)
     def s(self) -> bool:
         nums = list()
         for e in self.cartas:
@@ -100,6 +119,7 @@ class Pontos(object):
         
         return False
 
+    # Trinca 
     def trinca(self) -> bool:
         nums = [e[0] for e in self.cartas]
         for num in nums:
@@ -108,6 +128,7 @@ class Pontos(object):
 
         return False
 
+    # Dois pares 
     def doispares(self) -> bool:
         par0 = False
         
@@ -125,4 +146,3 @@ class Pontos(object):
                     return True
         
         return False
-

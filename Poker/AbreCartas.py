@@ -6,6 +6,7 @@ import time
 * Além disso, a ideia de receber parametros nas funções da classe
 * garante que seja possível tanto abrir as cartas pela primeira vez,
 * quanto trocar algumas pedidas pelo usuário
+* @author: 11800910
 '''
 
 class AbreCartas:
