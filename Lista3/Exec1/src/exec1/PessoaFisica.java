@@ -1,6 +1,8 @@
 
 public class PessoaFisica extends Pessoa{
 
+    double aniv, cpf;
+    String ecivil;
     public PessoaFisica(String nome, String endereco, String email, double telefone, double cpf, double aniversario, String estadocivil){
         super(nome, endereco, email, telefone);
         this.cpf = cpf;
@@ -23,7 +25,7 @@ public class PessoaFisica extends Pessoa{
     public void setCPF(double cpf){
         this.cpf = cpf;
     } 
-    public void setAniv(String aniv){
+    public void setAniv(double aniv){
         this.aniv = aniv;
     }
     public void setECivil(String ecvivil){

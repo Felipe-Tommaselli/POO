@@ -1,6 +1,8 @@
 
 public class Pessoa{
 
+    String nome, end, email;
+    double tel;
     public Pessoa(String nome, String endereco, String email, double telefone){
         this.nome = nome;
         this.end = endereco;
