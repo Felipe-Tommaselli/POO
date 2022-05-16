@@ -9,30 +9,30 @@ public class Pessoa{
     }
 
     // GETTERS
-    public getNome(){
+    public String getNome(){
         return this.nome;
     }
-    public getEnd(){
+    public String getEnd(){
         return this.end;
     }
-    public getEmail(){
+    public String getEmail(){
         return this.email;
     }
-    public getTel(){
+    public double getTel(){
         return this.tel;
     }
 
     // SETTER
-    public setNome(String nome){
+    public void setNome(String nome){
         this.nome = nome;
     } 
-    public setEnd(String endereco){
+    public void setEnd(String endereco){
         this.end = endereco;
     }
-    public setEmail(String email){
+    public void setEmail(String email){
         this.email = email;
     }
-    public setTel(double telefone){
+    public void setTel(double telefone){
         this.tel = telefone;
     }
 
