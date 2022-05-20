@@ -4,6 +4,11 @@
  */
 public class Exec1{
 
+    /**
+     * Main rodando o código a partir das outras classes
+     * @param args
+     * @throws Exception
+     */
     public static void main(String[] args) throws Exception {
             
         Contatos contato = new Contatos();
