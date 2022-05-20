@@ -28,8 +28,8 @@ public class PessoaFisica extends Pessoa{
     public void setAniv(double aniv){
         this.aniv = aniv;
     }
-    public void setECivil(String ecvivil){
-        this.ecivil = ecivil;
+    public void setECivil(String estcvivil){
+        this.ecivil = estcvivil;
     }
 
 }

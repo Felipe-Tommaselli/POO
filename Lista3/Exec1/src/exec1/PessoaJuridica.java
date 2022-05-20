@@ -3,10 +3,10 @@ public class PessoaJuridica extends Pessoa{
 
     double iestadual, cnpj;
     String rsocial;
-    public PessoaJuridica(String nome, String endereco, String email, double telefone, double cnpj, double iestadual, String razaosocial){
+    public PessoaJuridica(String nome, String endereco, String email, double telefone, double cnpj, double insestadual, String razaosocial){
         super(nome, endereco, email, telefone);
         this.cnpj = cnpj;
-        this.iestadual = iestadual;
+        this.iestadual = insestadual;
         this.rsocial = razaosocial;
     }
 
@@ -28,8 +28,8 @@ public class PessoaJuridica extends Pessoa{
     public void setiestadual(double iestadual){
         this.iestadual = iestadual;
     }
-    public void setrsocial(String ecvivil){
-        this.rsocial = rsocial;
+    public void setrsocial(String razaosocial){
+        this.rsocial = razaosocial;
     }
 
 }
