@@ -31,174 +31,189 @@ public class Contatos{
                 System.out.println("Cadastrar Pessoa Física\nInserir dados:\n\n1. Nome");
                 String nome = EntradaTeclado.leString();
 
-                int i = procuraContato(nome);
-                if(i != -1){ 
-                    System.out.println("** Aviso **\nJá há um registro com esse nome"); 
+                if(procuraContato(nome) != -1){ 
+                    System.out.println("ERRO: Há um registro com esse nome"); 
                     return; 
                 }
 
-                System.out.printf("Endereço: ");
+                System.out.printf("2. Endereço: ");
                 String end = EntradaTeclado.leString();
-                System.out.printf("Email: ");
+                System.out.printf("3. Email: ");
                 String email = EntradaTeclado.leString();
-                System.out.printf("Aniversário (DD/MM/AAAA): ");
-                String bday = EntradaTeclado.leString();
-                System.out.printf("Estado civil: ");
-                String ciestadual = EntradaTeclado.leString();
-                System.out.printf("CPF: ");
+                System.out.printf("4. Telefone: ");
+                double tel = EntradaTeclado.leDouble();
+                System.out.printf("5. Aniversário (DD/MM/AAAA): ");
+                double aniv = EntradaTeclado.leDouble();
+                System.out.printf("6. Estado civil: ");
+                String ecivil = EntradaTeclado.leString();
+                System.out.printf("7. CPF: ");
                 double cpf = EntradaTeclado.leDouble();
 
-                i = procuraContato(cpf);
-                if(i != -1) { System.out.println("** Aviso **\nJá há um registro com esse CPF"); return; }
-
-                System.out.printf("Insira o telefone: ");
-                Double phone = EntradaTeclado.leDouble();
-                pessoas[num_pessoas++] = new PessoaFisica(nome, end, email, bday, ciestadual, cpf, phone);
-                //Adiciona nova pessoa no vetor de contatos
+                if(procuraContato(cpf) != -1){ 
+                    System.out.println("CPF já registrado\n"); 
+                    return; 
+                }
+                
+                // adiciona a nova pessoa nos contatos
+                pessoas[num_pessoas++] = new PessoaFisica(nome, end, email, tel, cpf, aniv, ecivil);
 
             } catch(Exception e) {
-                System.out.printf("** Aviso **\nNão foi possível realizar o cadastro\nVerifique os valores de entrada");
+                System.out.printf("Não foi possível realizar o cadastro");
             }
         }
     }
 
-
-    //Função para cadastrar pessoa jurídica
-    public void cadastrarJuridica() {
-        if(num_pessoas == TAM-1) { //Verifica se há espaço no vetor
-            System.out.println("ERRO: Agenda cheio"); 
-            return;
+    /**
+     * Cadastra pessoas físicas (se houver como)
+     */
+    public void cadastrarJuridica(){
+        
+        if(num_pessoas > TAM){
+            System.out.println("Agenga cheia");
+            return ;
         }
+        else{
+            try {
+                //Faz a leitura das entradas do usuário
+                System.out.println("Cadastrar Pessoa Física\nInserir dados:\n\n1. Nome");
+                String nome = EntradaTeclado.leString();
 
-        try {
-            //Faz as leituras do usuário
-            System.out.println("**Pessoa Jurídica");
-            System.out.printf("\nInsira o nome: ");
-            String nome = EntradaTeclado.leString();
+                if(procuraContato(nome) != -1){ 
+                    System.out.println("ERRO: Há um registro com esse nome"); 
+                    return; 
+                }
 
-            int i = procuraContato(nome); //Verifica se há um registro c msm nome
-            if(i != -1) { System.out.println("** Aviso **\nJá há um registro com esse nome"); return; }
+                System.out.printf("2. Endereço: ");
+                String end = EntradaTeclado.leString();
+                System.out.printf("3. Email: ");
+                String email = EntradaTeclado.leString();
+                System.out.printf("4. Telefone: ");
+                double tel = EntradaTeclado.leDouble();
+                System.out.printf("5. Razão social: ");
+                String rsocial = EntradaTeclado.leString();
+                System.out.printf("6. Inscrição estadual: ");
+                double iestadual = EntradaTeclado.leDouble();
+                System.out.printf("7. CNPJ: ");
+                double cnpj = EntradaTeclado.leDouble();
 
-            System.out.printf("Eendereço: ");
-            String end = EntradaTeclado.leString();
-            System.out.printf("Email: ");
-            String email = EntradaTeclado.leString();
-            System.out.printf("Razão social: ");
-            String rsocial = EntradaTeclado.leString();
-            System.out.printf("Inscrição estadual: ");
-            String iestadual = EntradaTeclado.leString();
-            System.out.printf("CNPJ: ");
-            int cnpj = EntradaTeclado.leInt();
+                if(procuraContato(cnpj) != -1){ 
+                    System.out.println("** Aviso **\nJá há um registro com esse CNPJ"); 
+                    return; 
+                }
 
-            i = procuraContato(cnpj); //Verifica se há registro c msm CNPJ
-            if(i != -1) { System.out.println("** Aviso **\nJá há um registro com esse CNPJ"); return; }
+                pessoas[num_pessoas++] = new PessoaJuridica(nome, end, email, tel, rsocial, iestadual, cnpj);
 
-            pessoas[num_pessoas++] = new PessoaJuridica(nome, end, email, rsocial, iestadual, cnpj);
-            //Adiciona nova pessoa no vetor de contatos
-            
-        } catch(Exception e) {
-            System.out.printf("** Aviso **\nNão foi possível realizar o cadastro\nVerifique os valores de entrada");
+            } catch(Exception e) {
+                System.out.printf("Não foi possível realizar o cadastro");
+            }
+        }
+    }
+
+    /**
+     * imprimir um contato específico utilizando a toString
+     * utilização de polimorfismo
+     * @param pessoa
+     */
+    public void printContato(Pessoa pessoa){
+        if(pessoa instanceof PessoaFisica){
+            System.out.printf("" + (PessoaFisica) pessoa);
+        }else{
+            System.out.printf("" + (PessoaJuridica) pessoa);
         }
     }
 
 
-    //Função para imprimir um contato específico utilizando a toString
-    public void imprimirContato(Pessoa pessoa) {
-        if(pessoa instanceof PessoaFisica) {
-            System.out.printf("" + (PessoaFisica)pessoa);
-        } else {
-            System.out.printf("" + (PessoaJuridica)pessoa);
+    /**
+     * imprimir varios contatos
+     */
+    public void printContatos() {
+        for(int i = 0; i < num_pessoas; i++){
+            if(pessoas[i] == null){ 
+                continue; 
+            }
+            printContato(pessoas[i]);
         }
     }
 
 
-    //Função para imprimir todos os contatos
-    public void imprimirContatos() {
-        for(int i = 0; i < num_pessoas; i++) {
-            if(pessoas[i] == null) { continue; }
-            imprimirContato(pessoas[i]);
-        }
-    }
-
-
-    //Função para encontrar registro a partir do nome
-    public int procuraContato(String nome) {
-        for(int i = 0; i < num_pessoas; i++) {
-            if(pessoas[i] == null) { continue; }
-            if(pessoas[i].getnome().equals(nome)) { return i; }
+    /**
+     * Encontrar registro a partir do nome
+     * @param nome
+     * @return
+     */
+    public int procuraContato(String nome){
+        for(int i = 0; i < num_pessoas; i++){
+            if(pessoas[i] == null){ 
+                continue; 
+            }
+            if(pessoas[i].getNome().equals(nome)){ 
+                return i; 
+            }
         }
         return -1;
     }
 
-    //Função para encontrar registro a partir do cpf / cnpj
-    public int procuraContato(Double code) {
-        for(int i = 0; i < num_pessoas; i++) {
-            if(pessoas[i] == null) { continue; }
-            if(pessoas[i] instanceof PessoaFisica) { 
+    /**
+     * Encontrar registro a partir do cpf / cnpj
+     * @param obj
+     * @return
+     */
+    public int procuraContato(Double obj) {
+        for(int i = 0; i < num_pessoas; i++){
+            if(pessoas[i] == null){ 
+                continue; 
+            }
+            if(pessoas[i] instanceof PessoaFisica){ 
                 PessoaFisica p = (PessoaFisica)pessoas[i];
-                if(p.getCPF() == code) { return i; } 
-            } else {
+                if(p.getCPF() == obj){ 
+                    return i; 
+                } 
+            }else{
                 PessoaJuridica p = (PessoaJuridica)pessoas[i];
-                if(p.getCNPJ() == code) { return i; }
+                if(p.getCNPJ() == obj){ 
+                    return i;
+                }
             }
         }
         return -1;
     }
 
 
-    //Função para encontrar pessoa específica
-    public void encontrarPessoa() {
-        System.out.printf("Insira a chave de busca (Nome, CPF ou CNPJ): ");
-        String key = new String();
-        int index = -1;
-
+    /**
+     * Encontrar pessoa específica
+     */
+    public void encontrarPessoa(boolean flag) {
+        System.out.printf("Buscar por Nome, CPF ou CNPJ? ");
+        String busca = new String();
+        int pos = -1;
+        try{
+            busca = EntradaTeclado.leString();
+        }catch(Exception e){
+            System.out.printf("Não foi possível ler a chave de busca");
+        }
         try {
-            key = EntradaTeclado.leString();
-        } catch(Exception e) {
-            System.out.printf("** Aviso **\nNão foi possível ler a chave de busca\nVerifique os valores de entrada");
+            // se der para converter a chave para número, faz a busca por CPF ou CNPJ
+            double obj = Double.parseDouble(busca); 
+            pos = procuraContato(obj);
+        } catch(NumberFormatException e){
+            // ou, faz a busca por nome
+            pos = procuraContato(busca);
         }
 
-        try {
-            //Caso seja possível converter a chave para número, faz a busca por CPF / CNPJ
-            int code = Integer.parseInt(key); 
-            index = procuraContato(code);
-        } catch(NumberFormatException e) {
-            //Caso contrário, faz a busca por nome
-            index = procuraContato(key);
+        if(pos == -1){ 
+            System.out.println("Erro: Pessoa não encontrada\n"); 
+            return; 
         }
+        if(flag == true){
+            Pessoa a = pessoas[pos];
+            printContato(a);    
+        } else{        
+            for(int i = pos; i < num_pessoas; i++) {
+                pessoas[i] = pessoas[i+1];
+            }
+            num_pessoas--;
+        }
+        System.out.println("Operação realizada com sucesso\n");
 
-        if(index == -1) { System.out.println("** Aviso **\nPessoa não encontrada\n"); return; }
-        Pessoa p = pessoas[index];
-        imprimirContato(p);
     }
-
-
-    //Função para remover pessoa do vetor de contatos
-    public void removerPessoa() {
-        System.out.printf("Insira a chave de busca (Nome, CPF ou CNPJ): ");
-        String key = new String();
-        int index = -1;
-
-        try {
-            key = EntradaTeclado.leString();
-        } catch(Exception e) {
-            System.out.printf("** Aviso **\nNão foi possível ler a chave de busca\nVerifique os valores de entrada");
-        }
-
-        //Mesma busca que a utilizada anteriormente
-        try {
-            int code = Integer.parseInt(key);
-            index = procuraContato(code);
-        } catch(NumberFormatException e) {
-            index = procuraContato(key);
-        }
-
-        if(index == -1) { System.out.println("** Aviso **\nPessoa não encontrada\n"); return; }
-        for(int i = index; i < num_pessoas; i++) { //Traz todas as pessoas do vetor uma posição para frente
-            pessoas[i] = pessoas[i+1];
-        }
-        System.out.println("Pessoa removida com sucesso\n");
-        num_pessoas--;
-    }
-    
 }

@@ -15,7 +15,7 @@ public class PessoaJuridica extends Pessoa{
      * @param insestadual
      * @param razaosocial
      */
-    public PessoaJuridica(String nome, String endereco, String email, double telefone, double cnpj, double insestadual, String razaosocial){
+    public PessoaJuridica(String nome, String endereco, String email, double telefone, String razaosocial, double insestadual, double cnpj){
         super(nome, endereco, email, telefone);
         this.cnpj = cnpj;
         this.iestadual = insestadual;
