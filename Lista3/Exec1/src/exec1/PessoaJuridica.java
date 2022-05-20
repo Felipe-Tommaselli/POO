@@ -1,8 +1,20 @@
-
+/**
+ * Classe que cria a Pessoa jurídica a partir da Pessoa
+ */
 public class PessoaJuridica extends Pessoa{
 
     double iestadual, cnpj;
     String rsocial;
+    /**
+     * COnstrutor que a partir da herança da classe pessoa cria a Pessoa Jurídica
+     * @param nome
+     * @param endereco
+     * @param email
+     * @param telefone
+     * @param cnpj
+     * @param insestadual
+     * @param razaosocial
+     */
     public PessoaJuridica(String nome, String endereco, String email, double telefone, double cnpj, double insestadual, String razaosocial){
         super(nome, endereco, email, telefone);
         this.cnpj = cnpj;
