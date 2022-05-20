@@ -28,7 +28,8 @@ public class Contatos{
         else{
             try {
                 //Faz a leitura das entradas do usuário
-                System.out.println("Cadastrar Pessoa Física\nInserir dados:\n\n1. Nome");
+                System.out.println("Cadastrar Pessoa Física\nInserir dados:");
+                System.out.printf("\n1. Nome: ");
                 String nome = EntradaTeclado.leString();
 
                 if(procuraContato(nome) != -1){ 
@@ -75,7 +76,8 @@ public class Contatos{
         else{
             try {
                 //Faz a leitura das entradas do usuário
-                System.out.println("Cadastrar Pessoa Física\nInserir dados:\n\n1. Nome");
+                System.out.println("Cadastrar Pessoa Física\nInserir dados:");
+                System.out.printf("\n1. Nome: ");
                 String nome = EntradaTeclado.leString();
 
                 if(procuraContato(nome) != -1){ 
@@ -97,7 +99,7 @@ public class Contatos{
                 double cnpj = EntradaTeclado.leDouble();
 
                 if(procuraContato(cnpj) != -1){ 
-                    System.out.println("** Aviso **\nJá há um registro com esse CNPJ"); 
+                    System.out.println("Já há um registro com esse CNPJ"); 
                     return; 
                 }
 
@@ -116,9 +118,9 @@ public class Contatos{
      */
     public void printContato(Pessoa pessoa){
         if(pessoa instanceof PessoaFisica){
-            System.out.printf("" + (PessoaFisica) pessoa);
+            System.out.printf("\n " + (PessoaFisica) pessoa);
         }else{
-            System.out.printf("" + (PessoaJuridica) pessoa);
+            System.out.printf("\n " + (PessoaJuridica) pessoa);
         }
     }
 
@@ -216,7 +218,7 @@ public class Contatos{
             }
             num_pessoas--;
         }
-        System.out.println("Operação realizada com sucesso\n");
+        System.out.println("\nOperação realizada com sucesso\n");
 
     }
 }
