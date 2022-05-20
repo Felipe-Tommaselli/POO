@@ -182,7 +182,7 @@ public class Contatos{
     /**
      * Encontrar pessoa específica
      */
-    public void encontrarPessoa(boolean flag) {
+    public void tfPessoa(boolean flag) {
         System.out.printf("Buscar por Nome, CPF ou CNPJ? ");
         String busca = new String();
         int pos = -1;
@@ -204,10 +204,13 @@ public class Contatos{
             System.out.println("Erro: Pessoa não encontrada\n"); 
             return; 
         }
+
+        // ENCONTRAR PESSOA
         if(flag == true){
             Pessoa a = pessoas[pos];
             printContato(a);    
-        } else{        
+        } else{  
+            // REMOVER PESSOA      
             for(int i = pos; i < num_pessoas; i++) {
                 pessoas[i] = pessoas[i+1];
             }
