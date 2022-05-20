@@ -28,7 +28,8 @@ public class Contatos{
         else{
             try {
                 //Faz a leitura das entradas do usuário
-                System.out.println("Cadastrar Pessoa Física\nInserir dados:\n\n1. Nome");
+                System.out.println("Cadastrar Pessoa Física\nInserir dados:\n");
+                System.out.printf("1. Nome: ");
                 String nome = EntradaTeclado.leString();
 
                 if(procuraContato(nome) != -1){ 
@@ -75,7 +76,8 @@ public class Contatos{
         else{
             try {
                 //Faz a leitura das entradas do usuário
-                System.out.println("Cadastrar Pessoa Física\nInserir dados:\n\n1. Nome");
+                System.out.println("Cadastrar Pessoa Física\nInserir dados:\n");
+                System.out.printf("1. Nome: ");
                 String nome = EntradaTeclado.leString();
 
                 if(procuraContato(nome) != -1){ 
@@ -220,6 +222,17 @@ public class Contatos{
 
     }
 
+    private double buscaq(Pessoa p) {
+        if(p instanceof PessoaFisica) { 
+            PessoaFisica fisica = (PessoaFisica)p;
+            return fisica.getCPF(); 
+        }
+        else { 
+            PessoaJuridica juridica = (PessoaJuridica)p;
+            return juridica.getCNPJ(); 
+        }
+    }
+
     /**
      * partição do quicksort
      * @param pr
@@ -228,37 +241,22 @@ public class Contatos{
      * @return
      */
     private int part(Pessoa[] pr, int ini, int fim) {
-        long comp;
-        if(pr[fim] instanceof PessoaFisica){ 
-            PessoaFisica fisica = (PessoaFisica)p;
-            comp = fisica.getCPF(); 
-        } else{ 
-            PessoaJuridica juridica = (PessoaJuridica)p;
-            comp = juridica.getCNPJ(); 
-        }
-        long amt;
-        int i = ini - 1;
+        double comp = buscaq(pr[fim]); 
+        int k = ini - 1;
         for (int j = ini; j < fim; j++) {
-            if(pr[j] instanceof PessoaFisica){ 
-                PessoaFisica fisica = (PessoaFisica)p;
-                amt = fisica.getCPF(); 
-            } else{ 
-                PessoaJuridica juridica = (PessoaJuridica)p;
-                amt = juridica.getCNPJ(); 
-            }
-            if (amt <= comp) {
-                i++;
-                Pessoa temp = pr[i];
-                pr[i] = pr[j];
+            if (buscaq(pr[j]) <= comp) {
+                k++;
+                Pessoa temp = pr[k];
+                pr[k] = pr[j];
                 pr[j] = temp;
             }
         }
 
-        Pessoa temp = pr[i+1];
-        pr[i+1] = pr[fim];
+        Pessoa temp = pr[k+1];
+        pr[k+1] = pr[fim];
         pr[fim] = temp;
 
-        return i+1;
+        return k+1;
     }
 
     private void quickSort(Pessoa[] pr, int ini, int fim) {
@@ -271,12 +269,12 @@ public class Contatos{
 
 
     public void ordenar() {
-        Pessoa[] fisica = new Pessoa[SIZE];
-        Pessoa[] juridica = new Pessoa[SIZE];
+        Pessoa[] fisica = new Pessoa[TAM];
+        Pessoa[] juridica = new Pessoa[TAM];
         int num_fisica = 0;
         int num_juridica = 0;
 
-        for(int i = 0; i < nPessoas; i++){
+        for(int i = 0; i < num_pessoas; i++){
             if(pessoas[i] instanceof PessoaFisica){ 
                 fisica[num_fisica++] = pessoas[i]; 
             } else{ 

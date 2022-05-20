@@ -2,7 +2,7 @@
  *
  * @author 11800910
  */
-public class Exec1{
+public class Exec2{
 
     /**
      * Main rodando o código a partir das outras classes
