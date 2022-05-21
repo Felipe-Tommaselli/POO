@@ -126,6 +126,58 @@ public class Contatos{
 
 
     /**
+     * Encontrar pessoa específica
+     */
+    public void tfPessoa(boolean flag) {
+        System.out.printf("Buscar por Nome, CPF ou CNPJ? ");
+        String busca = new String();
+        int pos = -1;
+        try{
+            busca = EntradaTeclado.leString();
+        }catch(Exception e){
+            System.out.printf("Não foi possível ler a chave de busca");
+        }
+        try {
+            // se der para converter a chave para número, faz a busca por CPF ou CNPJ
+            double obj = Double.parseDouble(busca); 
+            pos = procuraContato(obj);
+        } catch(NumberFormatException e){
+            // ou, faz a busca por nome
+            pos = procuraContato(busca);
+        }
+
+        if(pos == -1){ 
+            System.out.println("Erro: Pessoa não encontrada\n"); 
+            return; 
+        }
+
+        // ENCONTRAR PESSOA
+        if(flag == true){
+            Pessoa pr = pessoas[pos];
+            printContato(pr);    
+        } else{  
+            // REMOVER PESSOA      
+            for(int i = pos; i < num_pessoas; i++) {
+                pessoas[i] = pessoas[i+1];
+            }
+            num_pessoas--;
+        }
+        System.out.println("Operação realizada com sucesso\n");
+
+    }
+
+    private double buscaq(Pessoa p) {
+        if(p instanceof PessoaFisica) { 
+            PessoaFisica fisica = (PessoaFisica)p;
+            return fisica.getCPF(); 
+        }
+        else { 
+            PessoaJuridica juridica = (PessoaJuridica)p;
+            return juridica.getCNPJ(); 
+        }
+    }
+
+    /**
      * imprimir varios contatos
      */
     public void printContatos() {
@@ -180,58 +232,6 @@ public class Contatos{
         return -1;
     }
 
-
-    /**
-     * Encontrar pessoa específica
-     */
-    public void tfPessoa(boolean flag) {
-        System.out.printf("Buscar por Nome, CPF ou CNPJ? ");
-        String busca = new String();
-        int pos = -1;
-        try{
-            busca = EntradaTeclado.leString();
-        }catch(Exception e){
-            System.out.printf("Não foi possível ler a chave de busca");
-        }
-        try {
-            // se der para converter a chave para número, faz a busca por CPF ou CNPJ
-            double obj = Double.parseDouble(busca); 
-            pos = procuraContato(obj);
-        } catch(NumberFormatException e){
-            // ou, faz a busca por nome
-            pos = procuraContato(busca);
-        }
-
-        if(pos == -1){ 
-            System.out.println("Erro: Pessoa não encontrada\n"); 
-            return; 
-        }
-
-        // ENCONTRAR PESSOA
-        if(flag == true){
-            Pessoa pr = pessoas[pos];
-            printContato(pr);    
-        } else{  
-            // REMOVER PESSOA      
-            for(int i = pos; i < num_pessoas; i++) {
-                pessoas[i] = pessoas[i+1];
-            }
-            num_pessoas--;
-        }
-        System.out.println("Operação realizada com sucesso\n");
-
-    }
-
-    private double buscaq(Pessoa p) {
-        if(p instanceof PessoaFisica) { 
-            PessoaFisica fisica = (PessoaFisica)p;
-            return fisica.getCPF(); 
-        }
-        else { 
-            PessoaJuridica juridica = (PessoaJuridica)p;
-            return juridica.getCNPJ(); 
-        }
-    }
 
     /**
      * partição do quicksort

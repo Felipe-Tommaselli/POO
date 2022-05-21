@@ -23,6 +23,24 @@ public class Gtm{
     }
 
     /**
+     * Imprimir todas as formas
+     */
+    public void printFormas(){
+        System.out.println("* Imprimindo Formas *");
+        for(int i = 0; i < num_formas; i++){
+            if(formas[i] instanceof Circulo){
+                System.out.println((Circulo)formas[i]);
+            } 
+            else if(formas[i] instanceof Quadrado){
+                System.out.println((Quadrado)formas[i]);
+            } 
+            else{
+                System.out.println((Retangulo)formas[i]);
+            }
+        }
+    }
+
+    /**
      * Inserir uma nova forma
      * @param flag
      */
@@ -106,23 +124,4 @@ public class Gtm{
     public void inserirCirculo(){
         insereForma(2);
     }
-
-    /**
-     * Imprimir todas as formas
-     */
-    public void printFormas(){
-        System.out.println("* Imprimindo Formas *");
-        for(int i = 0; i < num_formas; i++){
-            if(formas[i] instanceof Circulo){
-                System.out.println((Circulo)formas[i]);
-            } 
-            else if(formas[i] instanceof Quadrado){
-                System.out.println((Quadrado)formas[i]);
-            } 
-            else{
-                System.out.println((Retangulo)formas[i]);
-            }
-        }
-    }
-
 }

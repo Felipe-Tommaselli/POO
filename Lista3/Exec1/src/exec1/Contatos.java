@@ -112,33 +112,6 @@ public class Contatos{
     }
 
     /**
-     * imprimir um contato específico utilizando a toString
-     * utilização de polimorfismo
-     * @param pessoa
-     */
-    public void printContato(Pessoa pessoa){
-        if(pessoa instanceof PessoaFisica){
-            System.out.printf("\n " + (PessoaFisica) pessoa);
-        }else{
-            System.out.printf("\n " + (PessoaJuridica) pessoa);
-        }
-    }
-
-
-    /**
-     * imprimir varios contatos
-     */
-    public void printContatos() {
-        for(int i = 0; i < num_pessoas; i++){
-            if(pessoas[i] == null){ 
-                continue; 
-            }
-            printContato(pessoas[i]);
-        }
-    }
-
-
-    /**
      * Encontrar registro a partir do nome
      * @param nome
      * @return
@@ -179,6 +152,33 @@ public class Contatos{
         }
         return -1;
     }
+
+    /**
+     * imprimir um contato específico utilizando a toString
+     * utilização de polimorfismo
+     * @param pessoa
+     */
+    public void printContato(Pessoa pessoa){
+        if(pessoa instanceof PessoaFisica){
+            System.out.printf("\n " + (PessoaFisica) pessoa);
+        }else{
+            System.out.printf("\n " + (PessoaJuridica) pessoa);
+        }
+    }
+
+
+    /**
+     * imprimir varios contatos
+     */
+    public void printContatos() {
+        for(int i = 0; i < num_pessoas; i++){
+            if(pessoas[i] == null){ 
+                continue; 
+            }
+            printContato(pessoas[i]);
+        }
+    }
+
 
 
     /**
