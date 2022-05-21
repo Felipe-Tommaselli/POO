@@ -1,180 +1,221 @@
 public class Loja {
 
-    //Definição do vetor de itens
-    private static final int SIZE = 1000;
-    Estoque[] itens = new Estoque[SIZE];
-    int nItens = 0;
+    private static final int TAM = 1000;
+    Estoque[] itens = new Estoque[TAM];
+    int num_itens = 0;
 
-    //Função para cadastro de produto
-    public void cadastrarProduto() {
-        int funcao = -1, amount = 0, code = -1;
-        String name = "";
+    /**
+     * cadastro de produto
+     */
+    public void cadastraProduto(){
+        System.out.println("\nAdicionar Item \n\n");
 
-        System.out.println("\n** Adicionar Item **\n");
-        System.out.println("Insira o item que deseja adicionar");
         System.out.println("1) Inserir Livro");
         System.out.println("2) Inserir CD");
         System.out.println("3) Inserir DVD");
         System.out.println("");
-        try { funcao = EntradaTeclado.leInt(); }
-        catch (Exception e) {
-            System.out.println("\n** Erro **\nHouve um problema ao ler a função\nVerifique que o valor inserido é um inteiro de 1 a 3");
+
+        int modo = -1; 
+        int qte = 0; 
+        int num = -1;
+        String nome = "";
+        try{ 
+            modo = EntradaTeclado.leInt(); 
+        }
+        catch (Exception e){
+            System.out.println("\nErro: Bad input");
             return;
         }
 
-        try {
-            System.out.printf("Insira o código de barras para este produto: ");
-            code = EntradaTeclado.leInt();
+        try{
+            System.out.printf("Código de barras para este produto: ");
+            num = EntradaTeclado.leInt();
 
-            int exists = encontrarProdutoViaChave(code);
-            if(exists != -1) { System.out.printf("** Erro **\nJá existe um item com este código de barras"); return; }
+            if(ctProduto_codigo(num) != -1){ 
+                System.out.printf("Erro: produto já cadastrado\n"); 
+                return; 
+            }
 
             System.out.printf("Insira nome do produto: ");
-            name = EntradaTeclado.leString();
+            nome = EntradaTeclado.leString();
 
-            exists = encontrarProdutoViaChave(name);
-            if(exists != -1) { System.out.printf("** Erro **\nJá existe um item com este código de barras"); return; }
+            if(ctProduto_codigo(nome) != -1){ 
+                System.out.printf("Erro: produto já cadastrado\n"); 
+                return; 
+            }
 
-            System.out.printf("Caso queira, insira uma quantidade inicial para o estoque: ");
+            System.out.printf("Insira uma qte inicial para o estoque se quiser: ");
 
             try {
-                amount = EntradaTeclado.leInt();
-                if(amount < 0) { 
-                    System.out.printf("** Aviso **\nA quantidade inicial minima é 0");
-                    amount = 0;
+                qte = EntradaTeclado.leInt();
+                if(qte < 0){ 
+                    System.out.printf("\n>> A quantidade inicial minima é 0");
+                    qte = 0;
                 }
-            } catch(Exception e) { amount = 0; }
-            
+            } catch(Exception e){ 
+                qte = 0; 
+            }
+        } catch(Exception e){ 
+            System.out.println("\nErro: Não foi possível ler os valores da entrada"); 
+            return; 
+        }
 
-        } catch(Exception e) { System.out.println("\n** Erro **\nHouve um problema ao ler os valores de entrada"); return; }
-
-        switch(funcao) {
-            case 1: itens[nItens++] = new Livro(name, code, amount); break;
-            case 2: itens[nItens++] = new CD(name, code, amount); break;
-            case 3: itens[nItens++] = new DVD(name, code, amount); break;
-            default: System.out.println("\n** Erro **\nHouve um problema ao ler a função\nVerifique que o valor inserido é um inteiro de 1 a 3");
+        switch(modo){
+            case 1: itens[num_itens++] = new Livro(nome, num, qte); 
+                break;
+            case 2: itens[num_itens++] = new CD(nome, num, qte); 
+                break;
+            case 3: itens[num_itens++] = new DVD(nome, num, qte); 
+                break;
+            default: System.out.println("\nErro: Houve um problema ao ler o modo");
         }
     }
 
 
-    //Adicionar estoque a item ja existente
-    public void adicionarProduto() {
-        String key = "";
-        int amount = 0;
+    /**
+     * Adicionar mais estoque a um item ja existente
+     */
+    public void adicionarProduto(){
+        String flag = "";
+        int qte = 0;
 
-        System.out.println("\n** Adicionar Estoque **\n");
-        int index = coletarInformacoesEBuscarIndice();
-        if(index == -1) { System.out.println("** Erro **\nItem não encontrado"); return; }
+        System.out.println("\n Adicionar Estoque \n");
+        int pos = ctIndice();
+        if(pos == -1){ System.out.println("Erro \nItem não encontrado"); return; }
 
         try {
-            System.out.println("Item " + itens[index].getName() + " encontrado");
+            System.out.println("Item "+ itens[pos].getNome() + "encontrado");
             System.out.printf("Insira a quantidade que deseja acrescentar: ");
-            amount = EntradaTeclado.leInt();
+            qte = EntradaTeclado.leInt();
 
-            if(amount <= 0) { System.out.println("\n** Erro **\nQuantia inválida"); return; }
+            if(qte <= 0){ System.out.println("\nErro: Quantia inválida"); return; }
 
-        } catch(Exception e) { System.out.println("\n** Erro **\nHouve um problema ao ler os valores de entrada"); return; }
+        } catch(Exception e){ System.out.println("\nErro: Houve um problema ao ler os valores de entrada"); return; }
 
-        itens[index].adicionar(amount);
-        System.out.println("\n** Quantia adicionada com sucesso **");
-        System.out.println("Quantidade atual: " + itens[index].getAmount());
+        itens[pos].adicionar(qte);
+        System.out.println("\n Quantia adicionada com sucesso ");
+        System.out.println("Quantidade atual: "+ itens[pos].getQte());
     }
 
 
-    //Função para encontrar produtos através do código de barras
-    private int encontrarProdutoViaChave(int code) {
-        for(int i = 0; i < nItens; i++) {
-            if(code == itens[i].getCode()) { return i; }
+    /**
+     * Encontrar produtos através do código de barras
+     * @param num
+     * @return
+     */
+    public int ctProduto_codigo(int num){
+        for(int i = 0; i < num_itens; i++){
+            if(num == itens[i].getNum()){ 
+                return i;
+            }
         }
         return -1;
     }
 
-    //Função para encontrar produtos através do nome
-    private int encontrarProdutoViaChave(String name) {  
-        for(int i = 0; i < nItens; i++) {
-            if(name.equals(itens[i].getName())) { return i; }
+    /**
+     * Encontrar produtos através do nome
+     * @param nome
+     * @return
+     */
+    public int ctProduto_codigo(String nome){  
+        for(int i = 0; i < num_itens; i++){
+            if(nome.equals(itens[i].getNome())){ 
+                return i; 
+            }
         }
         return -1;
     }
 
 
-    //Le dados de busca do usuário e retorna o índice do produto correspondente
-    private int coletarInformacoesEBuscarIndice() {
-        String key = "";
-        int amount = 0, index = -1;
+    /**
+     * Le dados de busca do usuário e retorna a posição do produto
+     * @return
+     */
+    public int ctIndice(){
+        String flag = "";
+        int qte = 0, pos = -1;
 
         try {
             System.out.printf("Insira o nome ou código de barras do item que deseja modificar ");
-            key = EntradaTeclado.leString();
+            flag = EntradaTeclado.leString();
 
             try {
-                int code = Integer.parseInt(key);
-                index = encontrarProdutoViaChave(code);
-                if(index == -1) { index = encontrarProdutoViaChave(key); } 
+                int num = Integer.parseInt(flag);
+                pos = ctProduto_codigo(num);
+                if(pos == -1){ pos = ctProduto_codigo(flag); } 
                 //Faz a busca pelo nome caso nao encontre pelo codigo (nome pode ser apenas numeros)
             } 
-            catch(Exception e) {
-                index = encontrarProdutoViaChave(key);
+            catch(Exception e){
+                pos = ctProduto_codigo(flag);
             }
             
-        } catch(Exception e) { System.out.println("\n** Erro **\nHouve um problema ao ler os valores de entrada"); return -2; }
+        } catch(Exception e){ System.out.println("\nErro: Houve um problema ao ler os valores de entrada"); return -2; }
 
-        return index;
+        return pos;
     }
 
     
-    //Função para buscar e imprimir certo produto
-    public void buscarProduto() {
-        System.out.println("\n** Buscar Item **\n");
-        int index = coletarInformacoesEBuscarIndice();
-        if(index == -1) { System.out.println("\n** Erro **\nItem não encontrado"); return; }
-        System.out.println("\n** Produto encontrado **\n" + itens[index]);
-    }
-
-    
-    public void venderProduto() {
-        System.out.println("\n** Vender Item **\n");
-        int amount = 0, index = coletarInformacoesEBuscarIndice();
-        if(index == -1) { System.out.println("\n** Erro **\nItem não encontrado"); return; }
-
-        try {
-            try {
-                System.out.println("Item " + itens[index].getName() + " encontrado");
-                System.out.printf("Insira a quantidade que deseja acrescentar: ");
-                amount = EntradaTeclado.leInt();
-
-                if(amount <= 0) { System.out.println("\n** Erro **\nQuantia inválida"); return; }
-
-            } catch(Exception e) { System.out.println("\n** Erro **\nHouve um problema ao ler os valores de entrada"); return; }
-
-            itens[index].remover(amount);
-            System.out.println("\n** Remoção realizada com sucesso **\nNovo estoque: " + itens[index].getAmount());
-        
-        } catch(Exception e) {
-            System.out.println("\n** Erro **\nA quantia fornecida é maior que a disponível em estoque");
-        }
-    }
-
-    
-    //Função para imprimir todo o estoque disponível
-    public void imprimirEstoque() {
-        System.out.println("\n** Imprimindo estoque **\n");
-        for(int i = 0; i < nItens; i++) {
+    /**
+     * imprimir todo o estoque disponível
+     */
+    public void printEstoque(){
+        System.out.println("\n Imprimindo estoque \n");
+        for(int i = 0; i < num_itens; i++){
             System.out.println(itens[i]);
         }
     }
 
 
-    //Função para excluir produto
-    public void excluirProduto() {
-        System.out.println("\n** Excluir Item **\n");
-        int index = coletarInformacoesEBuscarIndice(); //Encontra o índice do produto a ser excluido
-        if(index == -1) { System.out.println("\n** Erro **\nItem não encontrado"); return; }
-        for(int i = index; i < nItens; i++) { //Faz a remoção do item
+    /**
+     * excluir produto
+     */
+    public void excluirProduto(){
+        System.out.println("\n Excluir Item \n");
+        int pos = ctIndice(); 
+        if(pos == -1){ 
+            System.out.println("\nErro: Item não encontrado"); 
+            return; }
+        for(int i = pos; i < num_itens; i++){ 
             itens[i] = itens[i+1];
         }
-        nItens--;
-        System.out.println("\n** Item excluido com sucesso **");
+        num_itens--;
+        System.out.println("\n Item excluido");
+    }
+
+    /**
+     * buscar e imprimir certo produto
+     */
+    public void getProduto(){
+        System.out.println("\n Buscar Item \n");
+        int pos = ctIndice();
+        if(pos == -1){ System.out.println("\nErro: Item não encontrado"); return; }
+        System.out.println("\n Produto encontrado \n"+ itens[pos]);
+    }
+
+    /**
+     * Vender produto (remover)
+     */
+    public void removeProduto(){
+        System.out.println("\n Vender Item \n");
+        int qte = 0, pos = ctIndice();
+        if(pos == -1){ System.out.println("\nErro: Item não encontrado"); return; }
+
+        try {
+            try {
+                System.out.println("Item "+ itens[pos].getNome() + "encontrado");
+                System.out.printf("Insira a quantidade que deseja acrescentar: ");
+                qte = EntradaTeclado.leInt();
+
+                if(qte <= 0){ System.out.println("\nErro: Quantia inválida"); return; }
+
+            } catch(Exception e){ System.out.println("\nErro: Houve um problema ao ler os valores de entrada"); return; }
+
+            itens[pos].remover(qte);
+            System.out.println("\n Remoção realizada com sucesso \nNovo estoque: "+ itens[pos].getQte());
+        
+        } catch(Exception e){
+            System.out.println("\nErro: A quantia fornecida é maior que a disponível em estoque");
+        }
     }
 
 }

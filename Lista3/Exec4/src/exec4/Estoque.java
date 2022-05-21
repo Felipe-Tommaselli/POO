@@ -1,37 +1,65 @@
+/**
+ * Classe que cria o estoque com os produtos e as quantidades
+ */
 public class Estoque {
 
-    //Item genérico com informações de nome, qte disponível e código
     private String nome;
     private int estoque;
-    private long codigo;
+    private double num;
 
-    //Construtor
-    public Estoque(String nome, long codigo, int quantiaInicial) {
+    /**
+     * Construtor de um item genérico
+     * @param nome
+     * @param num
+     * @param qte0
+     */
+    public Estoque(String nome, double num, int qte0){
         this.nome = nome;
-        this.codigo = codigo;
-        this.estoque = quantiaInicial;
+        this.num = num;
+        this.estoque = qte0;
     }
 
-    //Getters e Setters
-    public String getName() { return this.nome; }
-    public long getCode() { return this.codigo; }
-    public int getAmount() { return this.estoque; }
+    // Getters 
+    public String getNome(){ 
+        return this.nome; 
+    }
+    public double getNum(){ 
+        return this.num; 
+    }
+    public int getQte(){ 
+        return this.estoque; 
+    }
     
-    public void setName(String nome) { this.nome = nome; }
-    public void setCode(long codigo) { this.codigo = codigo; }
-    public void setAmount(int estoque) { this.estoque = estoque; }
-
-
-    //Remover (vender) quantia do estoque
-    //Envia excessão caso novo estoque seja negativo
-    public void remover(int quantia) throws Exception {
-        if(this.estoque - quantia < 0) { throw new Exception(); }
-        setAmount(this.estoque - quantia);
+    // Setters
+    public void setNome(String nome){ 
+        this.nome = nome; 
+    }
+    public void setNum(double num){ 
+        this.num = num; 
+    }
+    public void setQte(int estoque){ 
+        this.estoque = estoque; 
     }
 
-    //Adicionar (comparar) quantia ao estoque
-    public void adicionar(int quantia) {
-        setAmount(this.estoque + quantia);
+    /**
+     * Adicionar qunatia ao estoque
+     * @param produtos
+     */
+    public void adicionar(int produtos){
+        setQte(this.estoque + produtos);
     }
+
+    /**
+     * Remover ou vender quantia do estoque (se houver)
+     * @param produtos
+     * @throws Exception
+     */
+    public void remover(int produtos) throws Exception{
+        if(this.estoque - produtos < 0){ 
+            throw new Exception(); 
+        }
+        setQte(this.estoque - produtos);
+    }
+
 
 }
