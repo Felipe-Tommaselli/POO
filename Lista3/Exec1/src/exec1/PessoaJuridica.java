@@ -1,4 +1,4 @@
-/**
+/*  *
  * Classe que cria a Pessoa jurídica a partir da Pessoa
  */
 public class PessoaJuridica extends Pessoa{

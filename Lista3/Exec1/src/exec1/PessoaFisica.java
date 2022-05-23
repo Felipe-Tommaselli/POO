@@ -29,8 +29,8 @@ public class PessoaFisica extends Pessoa{
     public double getAniv(){
         return this.aniv;
     }
-    public double getECivil(){
-        return this.cpf;
+    public String getECivil(){
+        return this.ecivil;
     }
 
     // SETTERS
