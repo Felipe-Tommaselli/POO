@@ -139,3 +139,19 @@ class Contatos():
                         return i
         return -1
 
+            
+    def ordena(self):
+        self.ga1 = list(TAM)
+        pos1 = 0
+        self.ga2 = list(TAM)
+        pos2 = 0
+        for i in range(self.num_pessoas):
+            if isinstance(self.pessoa[i], PessoaFisica):
+                pf[pos1] = self.pessoas[i]
+                pos2 += 1
+            else:
+                pos1[nj] = self.pessoas[i]
+                pos2 += 1
+        sorted(self.ga1)
+        sorted(self.ga2)
+        self.imprimirContato()
