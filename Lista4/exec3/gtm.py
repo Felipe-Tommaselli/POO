@@ -33,11 +33,11 @@ class gtm():
         # flag 1: RETANGULO
         # flag 2: CIRCULO
         if modo == 'quadrado': 
-            print("\nInserir quadrado") 
+            print("\nInserir quadrado".upper()) 
         elif modo == 'retangulo':
-            print("\nInserir retângulo")
+            print("\nInserir retângulo".upper())
         elif modo == 'circulo':
-            print("\nInserir círculo") 
+            print("\nInserir círculo".upeer()) 
         
         lados =  [-1.0, -1.0]
 
@@ -98,12 +98,3 @@ class gtm():
         except Exception as e:
             print(f"ERRO: {e}\nHouve um erro ao ler os valores de entrada")
             return
-        print(self.formas)
-        
-
-g = gtm()
-print(g)
-g.insereFormas('quadrado')
-g.insereFormas('retangulo')
-
-g.printFormas()
