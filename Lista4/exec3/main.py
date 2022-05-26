@@ -25,11 +25,11 @@ def main():
                 print(f'\nErro: {e}')
             
         if modo == 1:
-            gtm_.insereQuadrado()
+            gtm_.insereFormas('quadrado')
         elif modo == 2:
-            gtm_.insereRetangulo()
+            gtm_.insereFormas('retangulo')
         elif modo == 3:
-            gtm_.insereCirculo()
+            gtm_.insereFormas('circulo')
         elif modo == 4:
             gtm_.printFormas()
         else:

@@ -9,7 +9,7 @@ class gtm():
 
     def __init__(self):
         self.formas = [0 for i in range(0, TAM)]
-        self.num_formas = 0
+        self.num_forma = 0
 
     def getLado(self) -> float:
         try:
@@ -20,92 +20,90 @@ class gtm():
 
     def printFormas(self) -> None:
         print('FORMAS:\n')
-        for i in range(0, self.num_formas):
-            if isinstance(self.formas[i], circulo):
-                print('\nCirculo: ' + str(self.formas[i]))
-            if isinstance(self.formas[i], quadrado):
-                print('\nQuadrado: ' + str(self.formas[i]))
-            if isinstance(self.formas[i], retangulo):
-                print('\nRetangulo: ' + str(self.formas[i]))
+        for forma in self.formas:
+            if isinstance(forma, circulo):
+                print('\nCirculo: ' + str(forma))
+            if isinstance(forma, quadrado):
+                print('\nQuadrado: ' + str(forma))
+            if isinstance(forma, retangulo):
+                print('\nRetangulo: ' + str(forma))
 
-    def insereFormas(self, flag: int) -> None:
+    def insereFormas(self, modo: str) -> None:
         # flag 0: QUADRADO 
         # flag 1: RETANGULO
         # flag 2: CIRCULO
-        if flag == 0: 
+        if modo == 'quadrado': 
             print("\nInserir quadrado") 
-        elif flag == 1:
-            print("\nInserir retângulo") 
-        elif flag == 2:
+        elif modo == 'retangulo':
+            print("\nInserir retângulo")
+        elif modo == 'circulo':
             print("\nInserir círculo") 
         
         lados =  [-1.0, -1.0]
 
-        if flag == 0:
-            print("Insira o lado: ")
-            lados[0] = self.getLado()
-            lados[1] = lados[0]
-        
-
-        if flag == 1:
-            print("Inserção de lados\n")
-            print("Insira o lado 1: ")
-            lados[0] = self.getLado()
-            print("Insira o lado 2: ")
-            lados[1] = self.getLado()
-        
-
-        if flag == 2:
-            print("Insira o raio: ")
-            lados[0] = self.getLado()
-            lados[1] = lados[0]
-        
-
-
-        if lados[0] == -1 or lados[1] == -1: 
-            print("ERRO: Não foi possível ler o valor para o lado")
-            print("Verifique que o valor inserido é um numero positivo")
-            return
-        
-
         try:
+            if modo == 'quadrado':
+                print("Insira o lado: ")
+                lados[0] = self.getLado()
+                lados[1] = lados[0]
+            
+
+            if modo == 'retangulo':
+                print("Insira o lado 1: ")
+                lados[0] = self.getLado()
+                print("Insira o lado 2: ")
+                lados[1] = self.getLado()
+            
+
+            if modo == 'circulo':
+                print("Insira o raio: ")
+                lados[0] = self.getLado()
+                lados[1] = lados[0]
+            
+
+
+            if lados[0] == -1 or lados[1] == -1: 
+                print("ERRO: Não foi possível ler o valor para o lado")
+                print("Verifique que o valor inserido é um numero positivo")
+                return
+        
+
             self.cheio = False
             self.cheioStr = input('Mudar cor? ("sim" em caso afirmativo) ') 
-            print(self.cheioStr.strip().lower())
+            self.cheioStr.strip().lower()
             self.cor = ""
 
-            if self.cheioStr is 'sim':
+            if self.cheioStr == 'sim':
                 self.cheio = True
                 self.cor = input('Insira a cor desejada: ')
             
-            if flag == 0: 
-                self.formas[self.num_formas] = quadrado(lados[0], self.cheio, self.cor)
-                self.num_formas += 1
+            if modo == 'quadrado': 
+                self.formas[self.num_forma] = quadrado(lados[0], self.cheio, self.cor)
+                self.num_forma += 1
                 print("Forma criada com sucesso: ")
-                print(str(self.formas[self.num_formas]))
+                print(str(self.formas[self.num_forma]))
             
-            if flag == 1:
-                self.formas[self.num_formas] = retangulo(lados[0], lados[1], self.cheio, self.cor)
-                self.num_formas += 1
+            if modo == 'retangulo':
+                self.formas[self.num_forma] = retangulo(lados[0], lados[1], self.cheio, self.cor)
+                self.num_forma += 1
                 print("Forma criada com sucesso: ")
-                print(str(self.formas[self.num_formas]))
+                print(str(self.formas[self.num_forma]))
             
-            if flag == 2: 
-                self.formas[self.num_formas] = circulo(lados[0], self.cheio, self.cor)
-                self.num_formas += 1
+            if modo == 'circulo': 
+                self.formas[self.num_forma] = circulo(lados[0], self.cheio, self.cor)
+                self.num_forma += 1
                 print("Forma criada com sucesso: ")
-                print(str(self.formas[self.num_formas]))
+                print(str(self.formas[self.num_forma]))
         
         except Exception as e:
             print(f"ERRO: {e}\nHouve um erro ao ler os valores de entrada")
             return
+        print(self.formas)
         
 
-    def insereQuadrado(self):
-        self.insereFormas(0)
+g = gtm()
+print(g)
+g.insereFormas('quadrado')
+g.insereFormas('retangulo')
 
-    def insereRetangulo(self):
-        self.insereFormas(1)
-
-    def insereCirculo(self):
-        self.insereFormas(2)
+g.printFormas()
