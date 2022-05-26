@@ -3,14 +3,15 @@ from retangulo import *
 from circulo import *
 from forma import *
 
-TAM = 1000
 
 class gtm():
 
     def __init__(self):
-        self.formas = [0 for i in range(0, TAM)]
+        self.formas = [0 for i in range(0, 1000)]
         self.num_forma = 0
 
+    #  * Ler lado
+    #  * @return
     def getLado(self) -> float:
         try:
             return float(input('Lado: '))
@@ -18,6 +19,7 @@ class gtm():
             print('Um erro ocorreu')
             exit()
 
+    # * Imprimir todas as formas
     def printFormas(self) -> None:
         print('FORMAS:\n')
         for forma in self.formas:
@@ -28,6 +30,8 @@ class gtm():
             if isinstance(forma, retangulo):
                 print('\nRetangulo: ' + str(forma))
 
+    # * Inserir uma nova forma
+    # * @param flag
     def insereFormas(self, modo: str) -> None:
         # flag 0: QUADRADO 
         # flag 1: RETANGULO

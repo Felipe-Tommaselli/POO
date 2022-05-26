@@ -4,8 +4,6 @@ def main():
     loja_ = loja()
 
     while(True):
-        modo = -1
-
 
         print("\n===========  PRODUTOS ===========\n\n")
 
@@ -16,28 +14,28 @@ def main():
         print("5) Exibir estoque completo")
         print("6) Excluir item")
         print("7) Encerrar programa")
-        print("")
+        print("\n")
 
-        sel = -1
+        sel = 1
         while(True):
             try:  
                 sel = int(input('>> '))
             except Exception as e:
                 print(f'\nErro: {e}')
             
-        if modo == 1:
+        if sel == 1:
             loja_.__int__()
-        elif modo == 2:
+        elif sel == 2:
             loja_.adicionarProduto()
-        elif modo == 3:
+        elif sel == 3:
             loja_.getProduto()
-        elif modo == 4:
+        elif sel == 4:
             loja_.removeProduto()
-        elif modo == 5:
+        elif sel == 5:
             loja_.printEstoque
-        elif modo == 6:
+        elif sel == 6:
             loja.excluirProduto()
-        elif modo == 7:
+        elif sel == 7:
             exit()
         else:
             print('Encerrando programa')
