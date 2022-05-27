@@ -24,7 +24,7 @@ def main():
             except Exception as e:
                 print(f'\nErro: {e}')
             
-        if modo == 1:
+        if   modo == 1:
             gtm_.insereFormas('quadrado')
         elif modo == 2:
             gtm_.insereFormas('retangulo')

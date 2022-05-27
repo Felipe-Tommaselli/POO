@@ -28,7 +28,7 @@ def main():
             except Exception as e:
                 print(f'\nErro: {e}')
                 
-        if modo == 1:
+        if   modo == 1:
             loja_.cadastrarProduto()
         elif modo == 2:
             loja_.adicionarProduto()
@@ -37,13 +37,13 @@ def main():
         elif modo == 4:
             loja_.removeProduto()
         elif modo == 5:
-            loja_.printEstoque
+            loja_.printEstoque()
         elif modo == 6:
             loja.excluirProduto()
         elif modo == 7:
             exit()
         else:
-            print('Encerrando programa')
+            print('Erro: Modo inválido')
         
 
 if __name__ == '__main__':

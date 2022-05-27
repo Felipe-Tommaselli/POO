@@ -10,7 +10,7 @@ class DVD(estoque):
         super().__init__(nome, num, qte)
 
     def __str__(self) -> str:
-        s = 'Tipo: DVD'
+        s = '\nTipo: DVD\n'
         s += "Nome: " + str(self.getNome()) + "\n"
         s += "Código de Barras: " + str(self.getNum()) + "\n"
         s += "Quantia em Estoque: " + str(self.getQte()) + "\n"
