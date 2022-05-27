@@ -1,3 +1,5 @@
+from estoque import *
+
 class CD(estoque):
 
     #  * expande a classe Estoque com as info do CD
@@ -5,7 +7,7 @@ class CD(estoque):
     #  * @param num
     #  * @param qte
     def __init__(self, nome: str, num: int, qte: int):
-        super().__int__(nome, num, qte)
+        super().__init__(nome, num, qte)
 
     def __str__(self) -> str:
         s = 'Tipo: CD'

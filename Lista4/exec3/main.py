@@ -16,11 +16,11 @@ def main():
         print("5) Encerrar programa")
         print("")
 
-        problema = True
-        while(problema):
+        x = True
+        while(x):
             try:  
                 modo = int(input('>> '))
-                problema = False
+                x = False
             except Exception as e:
                 print(f'\nErro: {e}')
             

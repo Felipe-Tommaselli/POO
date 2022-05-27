@@ -1,3 +1,5 @@
+from estoque import *
+
 class DVD(estoque):
 
     #  * expande a classe Estoque com as info do DVD

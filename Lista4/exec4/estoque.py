@@ -1,19 +1,19 @@
-class estoque():
+class estoque:
 
     #  * Construtor de um item genérico
     #  * @param nome
     #  * @param num
     #  * @param qte0
-    def __init__(self, nome: str, num: float, qte: int) -> None:
+    def __init__(self, nome: str, num: int, qte0: int) -> None:
         self.nome = nome
         self.num = num
-        self.estoque = qte0
+        self.qte = qte0
 
     # Getters
     def getNome(self) -> str:
         return self.nome
 
-    def getNum(self) -> float:
+    def getNum(self) -> int:
         return self.num
 
     def getQte(self) -> int:
@@ -23,24 +23,24 @@ class estoque():
     def setNome(self, nome) -> str:
         self.nome = nome
 
-    def setNum(self, num) -> float:
+    def setNum(self, num) -> int:
         self.num = num
 
     def setQte(self, estoque) -> int:
-        self.estoque = estoque
+        self.qte = estoque
 
 
     #  * Adicionar qunatia ao estoque
     #  * @param produtos
     def adicionar(self, produtos: int) -> None:
-        self.setQte(self.estoque + produtos)
+        self.setQte(self.qte + produtos)
 
     #  * Remover ou vender quantia do estoque (se houver)
     #  * @param produtos
     #  * @throws Exception
     def remover(produtos: int) -> None:
-        if self.estoque < produtos:
+        if self.qte < produtos:
             print('Não há estoque suficiente')
-            setQte(self.estoque)
+            setQte(self.qte)
         else:
-            setQte(self.estoque - produtos)
+            setQte(self.qte - produtos)

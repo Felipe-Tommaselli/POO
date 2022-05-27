@@ -1,6 +1,9 @@
 from loja import *
 
 def main():
+
+    print('\033[31m' + '===========    LOJA    ===========' + '\033[0;0m')  
+
     loja_ = loja()
 
     while(True):
@@ -16,26 +19,28 @@ def main():
         print("7) Encerrar programa")
         print("\n")
 
-        sel = 1
-        while(True):
+        modo = -1
+        x = True
+        while(x):
             try:  
-                sel = int(input('>> '))
+                modo = int(input('>> '))
+                x = False
             except Exception as e:
                 print(f'\nErro: {e}')
-            
-        if sel == 1:
-            loja_.__int__()
-        elif sel == 2:
+                
+        if modo == 1:
+            loja_.cadastrarProduto()
+        elif modo == 2:
             loja_.adicionarProduto()
-        elif sel == 3:
+        elif modo == 3:
             loja_.getProduto()
-        elif sel == 4:
+        elif modo == 4:
             loja_.removeProduto()
-        elif sel == 5:
+        elif modo == 5:
             loja_.printEstoque
-        elif sel == 6:
+        elif modo == 6:
             loja.excluirProduto()
-        elif sel == 7:
+        elif modo == 7:
             exit()
         else:
             print('Encerrando programa')

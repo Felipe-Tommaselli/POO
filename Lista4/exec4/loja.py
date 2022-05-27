@@ -1,59 +1,64 @@
+from estoque import *
+from livro import *
+from CD import *
+from DVD import *
+
 class loja:
 
     #  * cadastro de produto
     def __init__(self) -> None:
-        print("\nAdicionar Item \n\n")
-
-        print("1) Inserir Livro")
-        print("2) Inserir CD")
-        print("3) Inserir DVD\n")
-
+        self.itens = ['' for i in range(0, 1000)]
         self.modo = -1 
         self.qte = 0 
-        self.num_itens_itens = -1
-        self.nome = ""
+        self.num_itens = 0
+        self.nome = ""     
+
+    def cadastrarProduto(self) -> None:
+        
+        print("\n    Adicionar Item\n")
+
+        print("    1) Inserir Livro")
+        print("    2) Inserir CD")
+        print("    3) Inserir DVD\n")
+
         try: 
-            self.modo = int(input('>> ')) 
+            self.modo = int(input('> ')) 
         except Exception as e:
             print(f"\nErro: {e}")
             return
+
         
         try:
-            self.num_itens = int(input('Código de barras para este produto: '))
-            if self.ctProduto_codigo(self.num_itens) != -1: 
-                print("Erro: produto já cadastrado\n") 
-                return 
-            
-            self.nome = input('Insira nome do produto: ')
-
-            if self.ctProduto_codigo(self.nome) != -1: 
-                print("Erro: produto já cadastrado\n") 
-                return 
-
+            cbarras = int(input('Código de barras para este produto: '))
+            nome = input('Insira nome do produto: ')
             try:
                 self.qte = int(input("Insira uma qte inicial para o estoque se quiser: "))
                 if self.qte < 0: 
-                    print("\n>> A quantidade inicial minima é 0")
+                    print("\nErro: A quantidade inicial minima é 0")
                     self.qte = 0
-                
             except Exception as e: 
                 print(f'Erro: {e}')
                 self.qte = 0 
-            
+
+            if self.modo == 1:
+                self.itens[self.num_itens] = livro(nome, cbarras, self.qte) 
+            elif self.modo == 2: 
+                self.itens[self.num_itens] = CD(nome, cbarras, self.qte) 
+            elif 3: 
+                self.itens[self.num_itens] = DVD(nome, cabrras, self.qte) 
+            else:
+                print("\nErro: Houve um problema ao ler o modo")
+
+            if (self.ctProduto_codigo(cbarras) != -1) or (self.ctProduto_codigo(nome) != -1): 
+                print("Erro: produto já cadastrado\n") 
+
         except Exception as e: 
             print(f"\nErro: {e}") 
             return 
 
-        if self.modo == 1:
-            itens[self.num_itens_itens] = self.livro(self.nome, self.num_itens, self.qte) 
-        elif self.modo == 2: 
-            itens[self.num_itens_itens] = self.CD(self.nome, self.num_itens, self.qte) 
-        elif 3: 
-            itens[self.num_itens_itens] = self.DVD(self.nome, self.num_itens, self.qte) 
-        else:
-            print("\nErro: Houve um problema ao ler o modo")
-        
-        self.num_itens_itens += 1
+        self.num_itens += 1
+
+        print(self.itens[0])
     
     #  * Adicionar mais estoque a um item ja existente
     def adicionarProduto(self):
@@ -67,7 +72,7 @@ class loja:
             return 
 
         try:
-            print("Item "+ str(self.itens[pos].getNome()) + "encontrado")
+            print("Item "+ str((self.itens[pos]).getNome()) + "encontrado")
             print("Insira a quantidade que deseja acrescentar: ")
             self.qte = input()
 
@@ -89,14 +94,12 @@ class loja:
     #  * @return
     def ctProduto_codigo(self, chave):
         if type(chave) == 'int':
-            print('INT')
-            for i in range(0, self.num_itens_itens):
+            for i in range(0, self.num_itens):
                 if self.num_itens == self.itens[i].getNum(): 
                     return i
         else:
-            print('STR')
-            for i in range(0, self.num_itens_itens):
-                if self.nome.equals(self.itens[i].getNome()): 
+            for i in range(0, self.num_itens):
+                if self.nome == self.itens[i].getNome(): 
                     return i 
 
         return -1
@@ -133,8 +136,8 @@ class loja:
     #  * imprimir todo o estoque disponível
     def printEstoque(self):
         print("\n Imprimindo estoque \n")
-        for i in range(0, self.num_itens_itens):
-            print(itens[i])
+        for item in self.itens:
+            print(item)
 
 
     #  * excluir produto
@@ -144,10 +147,10 @@ class loja:
         if self.pos == -1: 
             print("\nErro: Item não encontrado") 
             return 
-        for i in range(0, self.num_itens_itens):
-            itens[i] = itens[i+1]
+        for i in range(0, self.num_itens):
+            self.itens[i] = self.itens[i+1]
         
-        self.num_itens_itens -= 1
+        self.num_itens -= 1
         print("\n Item excluido")
     
 
@@ -158,12 +161,12 @@ class loja:
         if pos == -1: 
             print("\nErro: Item não encontrado") 
             return 
-        print("\n Produto encontrado \n"+ str(itens[pos]))
+        print("\n Produto encontrado \n"+ str(self.itens[pos]))
     
 
     
     #  * Vender produto (remover)
-    def removeProduto(self):
+    def removerProduto(self):
         print("\n Vender Item \n")
         self.qte = 0
         self.pos = ctIndice()
@@ -173,8 +176,8 @@ class loja:
 
         try:
             try:
-                print("Item "+ itens[pos].getNome() + "encontrado")
-                print("Insira a quantidade que deseja acrescentar: ")
+                print("Item "+ str((estoque[pos]).getNome()) + "encontrado")
+                print("Insira a quantidade que deseja retirar: ")
                 self.qte = int(input())
 
                 if self.qte <= 0: 
@@ -184,11 +187,9 @@ class loja:
             except Exception as e: print("\nErro: Houve um problema ao ler os valores de entrada") 
             return 
 
-            self.itens[pos].remover(self.qte)
-            print("\n Remoção realizada com sucesso \nNovo estoque: "+ itens[pos].getself.Qte())
+            (self.itens[pos]).remover(self.qte)
+            print("\n Remoção realizada com sucesso \nNovo estoque: "+ (self.itens[pos]).getself.Qte())
         
         except Exception as e:
             print("\nErro: A quantia fornecida é maior que a disponível em estoque")
         
-    
-
