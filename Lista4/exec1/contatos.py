@@ -83,24 +83,21 @@ class Contatos():
             pos = self.procuraContato(cb)
 
         if pos == -1:
-            return (" AVISO \n Pessoa Infelizmente, não encontrada")
+            print("ERRO: Pessoa, infelizmente, não encontrada")
         elif pos != -1 and flag == True: # procurar
-            self.imprimirContatos(self.pessoas[pos])
+            print(self.pessoas[pos])
         else: # remover
-            for pos in range(len(self.pessoas)):
-                self.pessoas.pop(pos)
+            del self.pessoas[pos]
             self.num_pessoas -= 1
-
-        pessoa = self.pessoas[pos]
-        self.imprimirContato(pessoa)
+            print(f'\nPessoa {str(pos)} removida com sucesso')
 
     def procuraContato(self, chave):
-        if type(chave) == 'int':
+        if isinstance(chave, int):
             for i in range(len(self.pessoas)):
                 if len(self.pessoas) == 0:
                     continue
                 if isinstance(self.pessoas[i], PessoaFisica):
-                    if self.pessoas[i].getCPF() == chave: 
+                    if int(self.pessoas[i].getCPF()) == chave: 
                         return i
                 else: 
                     if self.pessoas[i].getCNPJ() == chave:
