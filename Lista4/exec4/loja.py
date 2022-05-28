@@ -50,7 +50,7 @@ class loja:
             else:
                 print("\nErro: Houve um problema ao ler o modo")
 
-            if (self.ctProduto_codigo(cbarras) != -1) or (self.ctProduto_codigo(nome) != -1): 
+            if (self.ctProduto_codigo(cbarras) == -1) or (self.ctProduto_codigo(nome) == -1): 
                 print("Erro: produto já cadastrado\n") 
 
             self.num_itens += 1
@@ -94,35 +94,35 @@ class loja:
     def ctProduto_codigo(self, chave):
         if isinstance(chave, int):
             for item in self.itens:
-                if self.num_itens == item.getNum(): 
-                    return i
+                if int(chave) == item.getNum(): 
+                    return self.itens.index(item)
         else:
             for item in self.itens:
-                if self.nome ==  item.getNome(): 
-                    return i 
+                if chave ==  item.getNome(): 
+                    return self.itens.index(item)
         return -1
 
 
     #  * Le dados de busca do usuário e retorna a posição do produto
     #  * @return
     def ctIndice(self):
-        flag = ""
+        chave = ""
         self.qte = 0
-        self.pos = -1
+        pos = -1
 
-        #try:
-        flag = input('Insira o nome ou código de barras do item que deseja modificar: ')
         try:
-            self.num_itens = int(flag)                
-            pos = self.ctProduto_codigo(self.cbarras)
-            if pos == -1: 
-                pos = self.ctProduto_codigo(flag)  
-        except Exception as e:
-            pos = self.ctProduto_codigo(flag)
+            chave = input('Insira o nome ou código de barras do item que deseja modificar: ')
+            try:
+                codigo = int(chave)                
+                pos = self.ctProduto_codigo(codigo)
+                if pos == -1: 
+                    pos = self.ctProduto_codigo(chave)  
+            except Exception as e:
+                pos = self.ctProduto_codigo(chave)
             
-        #except Exception as e: 
-        #    print(f"\nErro:{e}") 
-        #    return -2 
+        except Exception as e: 
+            print(f"\nErro:{e}") 
+            return -2 
 
         return pos
 
@@ -130,17 +130,17 @@ class loja:
     def getProduto(self):
         print('\033[32m' + "\nBuscar Item\n".upper() + '\033[0;0m')
         pos = self.ctIndice()
+        print('pos: ', pos)
         if pos == -1: 
             print("\nErro: Item não encontrado") 
             return 
-        print("\n Produto encontrado: " + str(self.itens[pos]))
+        print("\n Produto encontrado:\n" + str(self.itens[pos]))
 
     #  * imprimir todo o estoque disponível
     def printEstoque(self):
         print('\033[32m' + "\nImprimindo estoque\n".upper() + '\033[0;0m')
         for item in self.itens:
-            if item != '':
-                print(item)
+            print(item)
             
 
     #  * excluir produto
@@ -150,8 +150,8 @@ class loja:
         if self.pos == -1: 
             print("\nErro: Item não encontrado") 
             return 
-        for i in range(0, self.num_itens):
-            self.itens[i] = self.itens[i+1]
+        else:
+            del self.itens[pos]
         
         self.num_itens -= 1
         print("\n Item excluido")
@@ -167,7 +167,7 @@ class loja:
 
         try:
             try:
-                print("Item "+ str((estoque[pos]).getNome()) + "encontrado")
+                print("Item "+ str((self.itens[pos]).getNome()) + "encontrado")
                 print("Insira a quantidade que deseja retirar: ")
                 self.qte = int(input())
 
