@@ -3,11 +3,12 @@ from livro import *
 from CD import *
 from DVD import *
 
+TAM = 1000
 class loja:
 
     #  * cadastro de produto
     def __init__(self) -> None:
-        self.itens = ['' for i in range(0, 1000)]
+        self.itens = list()
         self.modo = -1 
         self.qte = 0 
         self.num_itens = 0
@@ -41,23 +42,21 @@ class loja:
                 self.qte = 0 
 
             if self.modo == 1:
-                self.itens[self.num_itens] = livro(nome, cbarras, self.qte) 
+                self.itens.append(livro(nome, cbarras, self.qte)) 
             elif self.modo == 2: 
-                self.itens[self.num_itens] = CD(nome, cbarras, self.qte) 
+                self.itens.append(CD(nome, cbarras, self.qte))
             elif 3: 
-                self.itens[self.num_itens] = DVD(nome, cbarras, self.qte) 
+                self.itens.append(DVD(nome, cbarras, self.qte)) 
             else:
                 print("\nErro: Houve um problema ao ler o modo")
 
             if (self.ctProduto_codigo(cbarras) != -1) or (self.ctProduto_codigo(nome) != -1): 
                 print("Erro: produto já cadastrado\n") 
 
+            self.num_itens += 1
         except Exception as e: 
             print(f"\nErro: {e}") 
             return 
-
-        print(self.itens[self.num_itens])
-        self.num_itens += 1
     
     #  * Adicionar mais estoque a um item ja existente
     def adicionarProduto(self):
@@ -93,17 +92,14 @@ class loja:
     #  * @param chave
     #  * @return
     def ctProduto_codigo(self, chave):
-        if type(chave) == 'int':
+        if isinstance(chave, int):
             for item in self.itens:
-                if item != '':
-                    if self.num_iten == item.getNum(): 
-                        return i
+                if self.num_itens == item.getNum(): 
+                    return i
         else:
             for item in self.itens:
-                if item != '':
-                    if self.nome ==  item.getNome(): 
-                        return i 
-
+                if self.nome ==  item.getNome(): 
+                    return i 
         return -1
 
 
