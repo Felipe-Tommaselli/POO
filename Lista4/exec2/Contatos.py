@@ -1,157 +1,156 @@
 from Pessoa import *
 from PessoaFisica import *
 from PessoaJuridica import *
-from sys import *
 
-TAM = 2000
+TAM = 1000
 class Contatos():
     def __init__(self):
         self.pessoas = list()
         self.num_pessoas = 0
     
-    def setCPF(self):
+    def PFisica(self):
         if self.num_pessoas == (TAM - 1):
-            print("** AVISO **\nAgenda de contatos cheia!")
+            print("AVISO\nAgenda de contatos cheia!")
             return
         
         try:
-            print('Cadastrar Pessoa Física\n')
-            nome = input('nome:')
+            print('\033[32m' + "\nCadastrar Pessoa Física\n".upper() + '\033[0;0m')
 
-            pos = self.procuraContato(nome)
+            nome        = input('nome:')
 
-            if pos != -1:
-                return ('\nJá existe um registro com este nome!')
-                
-            end = input('endereco: ')
-            email = input('e-mail: ')
-            aniv = input('aniversario: ')
-            ciestado = input('estado civil: ')
-            cpf = input('CPF: ')
+            if self.procuraContato(nome) != -1:
+                return ('\nNome já registrado!')
+            else:
+                end      =    input('endereco: ')
+                email    = input('e-mail: ')
+                aniv     = input('aniversario: ')
+                ciestado = input('estado civil: ')
+                cpf      = input('CPF: ')
 
-            self.pessoas[self.num_pessoas] = PessoaFisica(nome, cpf, end, aniv, email, ciestado)
-            print(self.pessoas)
-            num_pessoas += 1
+                self.pessoas.append(PessoaFisica(nome, cpf, end, aniv, email, ciestado))
+                self.num_pessoas += 1
 
-        except:
+        except Exception as e:
             print("Infelizmente, não foi possível realizar o cadastro")
+            print(f'Erro: {e}')
 
-    def procuraPessoa(self):
-        print("chave de busca: ")
-        
-        pos = -1
-        try:
-            ct = input()
-        except:
-            print("** AVISO **\nInfelizmente, não foi possível ler a chave!")
-
-        try:
-            pos = self.procuraContato(int(ct))
-        except:
-            pos = self.procuraContato(ct)
-
-        if pos == -1:
-            return ("** AVISO **\n Pessoa Infelizmente, não encontrada")
-
-        pessoa = self.pessoas[pos]
-        self.imprimirContato(pessoa)
-
-    def retiraPessoa(self):
-        print("chave de busca: ")
-
-        pos = -1
-
-        try:
-            ct = input()
-        except:
-            print("** AVISO **\nInfelizmente, não foi possível ler a chave!")
-        
-        try:
-            pos = self.procuraContato(int(ct))
-        except:
-            pos = self.procuraContato(ct)
-
-        if pos == -1:
-            return ("** AVISO **\n Pessoa Infelizmente, não encontrada")
-
-        for pos in range(self.num_pessoas):
-            self.pessoas[pos] = self.pessoas[pos + 1]
-            
-        self.num_pessoas -= 1
-            
-
-    def setPJuridica(self):
+    def PJuridica(self):
         if self.num_pessoas == (TAM - 1):
-            print("** AVISO **\nAgenda de contatos cheia!")
+            print(" AVISO \nAgenda de contatos cheia!")
             return
-        
+
         try:
-            print('Cadastrar Pessoa Jurídica\n')
-            nome = input('nome:')
+            print('\033[32m' + "\nCadastrar Pessoa Juridica\n".upper() + '\033[0;0m')
+            nome        = input('nome:')
 
-            pos = self.procuraContato(nome)
+            if self.procuraContato(nome) != -1:
+                return ('\nNome já registrado!')
+            else:
+                end     = input('endereco: ')
+                email   = input('e-mail: ')
+                iscr    = input('inscrição estadual: ')
+                rsocial = input('razão social: ')
+                cnpj    = int(input('CNPJ: '))
 
-            if pos != -1:
-                return ('\nJá existe um registro com este nome!')
-                
-            end = input('endereco: ')
-            email = input('e-mail: ')
-            iscr = input('inscrição estadual: ')
-            rsocial = input('razão social: ')
-            cnpj = int(input('CNPJ: '))
+                self.pessoas.append(PessoaJuridica(nome, cnpj, end, iscr, email, rsocial))
+                self.num_pessoas += 1   
 
-            self.pessoas[self.num_pessoas] = PessoaJuridica(nome, cnpj, end, iscr, email, rsocial)
-            num_pessoas += 1
-
-        except:
+        except Exception as e:
             print("Infelizmente, não foi possível realizar o cadastro")
+            print(f'Erro: {e}')
 
-    def imprimirContato(self):
-        if isinstance(self.pessoa, PessoaFisica):
-            print(PessoaFisica(self.pessoa))
-        else:
-            print(PessoaJuridica(self.pessoa))
 
     def imprimirContatos(self):
-        for i in range(self.num_pessoas):
-            if self.pessoas:
-                self.imprimirContato(self.pessoas[i])
+        for pessoa in self.pessoas:
+            if len(self.pessoas) == 0:
+                continue
             else:
-                pass
+                print(pessoa)
 
-    def procuraContato(self, nome):
-        for i in range(self.num_pessoas):
-            if self.pessoas:
-                self.pessoas[i].getnome() is nome
-            else:
-                pass
-    
-    def procuraContato(self, num):
-        for i in range(self.num_pessoas):
-            if self.pessoas:
-                if isinstance(self.pessoa, PessoaFisica):
-                    self.pessoas[i] = self.PessoaFisica() 
-                    if(self.pessoas[i].getCPF() == num):
+    def Proc_Rem_Pessoa(self, flag: bool): # procura ou remove a pessoa
+        # flag = False, remover
+        # flag = True , procurar
+        print("Nome, CPF ou CNPJ para busca: ")        
+        pos = -1
+        try:
+            cb = input()
+        except:
+            print("Erro: {e}")
+
+        try:
+            pos = self.procuraContato(int(cb))
+        except:
+            pos = self.procuraContato(cb)
+
+        if pos == -1:
+            print("ERRO: Pessoa, infelizmente, não encontrada")
+        elif pos != -1 and flag == True: # procurar
+            print(self.pessoas[pos])
+        else: # remover
+            del self.pessoas[pos]
+            self.num_pessoas -= 1
+            print(f'\nPessoa {str(pos)} removida com sucesso')
+
+    def procuraContato(self, chave):
+        if isinstance(chave, int):
+            for i in range(len(self.pessoas)):
+                if len(self.pessoas) == 0:
+                    continue
+                if isinstance(self.pessoas[i], PessoaFisica):
+                    if int(self.pessoas[i].getCPF()) == chave: 
                         return i
+                else: 
+                    if self.pessoas[i].getCNPJ() == chave:
+                        return i
+            return -1
+        else: 
+            for i in range(self.num_pessoas):
+                if len(self.pessoas) == 0:
+                    continue
                 else:
-                    self.pessoas[i] = self.PessoaJuridica()
-                    if(self.pessoas[i].getCNPJ() == num):
+                    if self.pessoas[i].getNome() == chave:
+                        print('\n')
                         return i
-        return -1
+            return -1
 
-            
-    def ordena(self):
-        self.ga1 = list(TAM)
-        pos1 = 0
-        self.ga2 = list(TAM)
-        pos2 = 0
-        for i in range(self.num_pessoas):
-            if isinstance(self.pessoa[i], PessoaFisica):
-                pf[pos1] = self.pessoas[i]
-                pos2 += 1
+    def bubbleSort(self, lista: list, flag: bool):
+        for passo in range(len(lista) - 1, 0, -1):
+            for k in range(passo):
+                if flag == True:
+                    if lista[k].getCPF() > lista[k + 1].getCPF():
+                        temp = lista[k].getCPF()
+                        lista[k].setCPF(lista[k + 1].getCPF())
+                        lista[k + 1].setCPF(tempo)
+                elif flag == False:
+                    if lista[k].getCNPJ() > lista[k + 1].getCNPJ():
+                        temp = lista[k].getCNPJ()
+                        lista[k].setCNPJ(lista[k + 1].getCNPJ())
+                        lista[k + 1].setCNPJ(temp)
+
+    def Ordenar(self):
+        Pfisica = list()
+        PJuridica = list()
+        N1 = 0 # conta pessoas fisicas
+        N2 = 0 # conta pessoas juridicas
+
+        for i in range(len(self.pessoas)):
+            if len(self.pessoas) == 0:
+                continue
+            if isinstance(self.pessoas[i], PessoaFisica):
+                Pfisica.append(self.pessoas[i])
+                N1 += 1
             else:
-                pos1[nj] = self.pessoas[i]
-                pos2 += 1
-        sorted(self.ga1)
-        sorted(self.ga2)
-        self.imprimirContato()
+                PJuridica.append(self.pessoas[i])
+                N2 += 1
+
+        self.bubbleSort(Pfisica, True)
+        self.bubbleSort(PJuridica, False)
+
+        for i in range(len(Pfisica)):
+            self.pessoas[i] = Pfisica[i]
+        
+        for i in range(len(PJuridica)):
+            self.pessoas[i + N1] = PJuridica[i]
+
+        print("Agenda ordenada com sucesso")
+        print('\n'.join(map(str, self.pessoas)))

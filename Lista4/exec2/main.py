@@ -1,32 +1,31 @@
 from Contatos import *
 
 def main():
-    agenda2 = Contatos()
+    agenda = Contatos()
 
     while True:
 
-        print("\n========= AGENDA2 =========")
+        print('\033[31m' + '===========  AGENDA  ===========' + '\033[0;0m')  
 
-        print("Selecione a função que deseja executar:")
+        print("Seleione um modo:")
         print("1) Cadastrar Pessoa Física")
         print("2) Cadastrar Pessoa Jurídica")
         print("3) Buscar por contato existente")
         print("4) Remover contato")
         print("5) Ordenar")
-        print("6) Sair")
+        print("6) Sair\n")
 
-        modo = int(input())
-
-        if modo == 1:
-            agenda2.setCPF()
+        modo = int(input('>> '))
+        if  modo == 1:
+            agenda.PFisica()
         elif modo == 2:
-            agenda2.setPJuridica()
+            agenda.PJuridica()
         elif modo == 3:
-            agenda2.procuraPessoa()
+            agenda.Proc_Rem_Pessoa(True) # procurar
         elif modo == 4:
-            agenda2.retiraPessoa()
+            agenda.Proc_Rem_Pessoa(False) # remover
         elif modo == 5:
-            agenda2.ordena()
+            agenda.Ordenar()
         else:
             break
 
