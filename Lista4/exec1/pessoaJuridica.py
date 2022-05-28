@@ -6,7 +6,17 @@ class PessoaJuridica(Pessoa):
         self.cnpj = cnpj
         self.iscr = iscr
         self.rsocial = rsocial
-        
+
+    def __str__(self):
+        s = '\nTipo: Pessoa Juridica\n'
+        s += "Nome: " + str(self.getNome()) + "\n"
+        s += "Endereço: " + str(self.getend()) + "\n"
+        s += "Email: " + str(self.getEmail()) + "\n"
+        s += "Razão Social: " + str(self.getrsocial()) + "\n"
+        s += "Inscriçaõ estadual: " + str(self.getiscr()) + "\n"
+        s += "CNPJ: " + str(self.getCNPJ()) + "\n"
+        return s
+
     def getCNPJ(self):
         return self.cnpj
     def getiscr(self):

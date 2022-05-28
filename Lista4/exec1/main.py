@@ -5,25 +5,24 @@ def main():
 
     while True:
 
-        print("\n========= AGENDA =========")
+        print('\033[31m' + '===========  AGENDA  ===========' + '\033[0;0m')  
 
-        print("Selecione a função que deseja executar:")
+        print("Seleione um modo:")
         print("1) Cadastrar Pessoa Física")
         print("2) Cadastrar Pessoa Jurídica")
         print("3) Buscar por contato existente")
         print("4) Remover contato")
-        print("5) Sair")
+        print("5) Sair\n")
 
-        modo = int(input())
-
+        modo = int(input('>> '))
         if modo == 1:
-            agenda.setCPF()
+            agenda.PFisica()
         elif modo == 2:
-            agenda.setPJuridica()
+            agenda.PJuridica()
         elif modo == 3:
-            agenda.procuraPessoa()
+            agenda.Proc_Rem_Pessoa(True) # procurar
         elif modo == 4:
-            agenda.retiraPessoa()
+            agenda.Proc_Rem_Pessoa(False) # remover
         else:
             break
 

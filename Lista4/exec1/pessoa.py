@@ -3,8 +3,8 @@ class Pessoa():
         self.nome = nome
         self.end = end
         self.email = email
-        
-    def genNome(self):
+
+    def getNome(self):
         return self.nome
 
     def getend(self):
