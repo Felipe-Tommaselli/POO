@@ -4,11 +4,17 @@ import csv, sys
 import os
 
 # * É NECESSÁRIO TER A PASTA 'ASSETS' PARA CONSEGUIR OBTER OS DADOS
+path = os.getcwd() + '\\assets\\'
 class data:
+    def getfiles(dir):
+        relpath = path + dir
+        for file in os.listdir(relpath):
+            if os.path.isfile(os.path.join(relpath, file)):
+                yield file
+    
+    # falta abrir as duas turmas 
     @staticmethod
-    def getData(nome: str):
-        path = os.getcwd() + '\\assets\\'
-        file = path + nome
+    def getTurmaList():
 
         turma = list()
         with open(file, encoding='utf-8') as ficheiro:
@@ -21,14 +27,18 @@ class data:
         return turma
 
     @staticmethod
-    def getInfo(nome: str):
-        turma = data.getData(nome)
+    def getTurmaInfo(fname: str):
+        turma = data.getTurmaList(fname)
         
         nomes = list()
         nusp = list()
         for linha in turma:
             nusp.append(int(linha[0]))
             nomes.append(linha[1])
-
         return nusp, nomes
+
+    @staticmethod
+    def getGruposList(fname: str):
+        print('hello')
+
 
