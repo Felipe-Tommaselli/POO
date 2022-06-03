@@ -7,6 +7,8 @@ import os
 path = os.getcwd() + '\\assets\\'
 class data:
 
+    erroAbrir = list()
+
     # * publica o arquivo a partir da lista de diretorios
     def getFiles(dir: str):
         relpath = path + dir
@@ -90,7 +92,8 @@ class data:
                 pos += 1 # vai para o próximo grupo
             except Exception as e: 
                 print('\033[31m' + f'Erro: Não foi possível ler o arquivo {file}, por: \n{e}' + '\033[0;0m')
-                grupos[pos].append([None, None])
+                data.erroAbrir.append(file)
+                grupos[pos].append(['None', 'None'])
                 pos += 1
 
         grupos = [e for e in grupos if e] # remove grupos vazios
