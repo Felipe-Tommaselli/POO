@@ -84,9 +84,9 @@ class data:
                                 if len(linha) > 2: # grupo com todas pessoas em uma unica linha
                                     parsed_list = [linha[i:i + 2] for i in range(0, len(linha), 2)] # quebra a lista de 2 em 2
                                     for pl in parsed_list:
-                                        grupos[pos].append(data.cleanData(pos)) #! adiciona de um em um
+                                        grupos[pos].append(data.cleanData(linha)) #! adiciona de um em um
                                 else:
-                                    grupos[pos].append(data.cleanData(linha)) # adiciona no grupo
+                                    grupos[pos].append(data.cleanData(pl)) # adiciona no grupo
                     except csv.Error as e:
                         sys.exit('ficheiro %s, linha %d: %s' % (file, reader.line_num, e)) # erro de leitura do csv 
                 pos += 1 # vai para o próximo grupo
