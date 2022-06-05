@@ -13,8 +13,8 @@ class data:
     def getFiles(dir: str):
         relpath = path + dir
         for file in os.listdir(relpath):
-            if os.path.isfile(os.path.join(relpath, file)):
-                yield file
+            if os.path.isfile(os.path.join(relpath, file)): # checa se é um arquivo
+                yield file 
 
     # * para limpar os dados de nome e nusp dos alunos
     def cleanData(s: list):
@@ -27,16 +27,16 @@ class data:
     def getTurmaList():
         turmas = [list(), list()] # duas turmas
         pos = 0
-        for file in data.getFiles(r''):
-            with open(path + file, encoding='utf-8') as ficheiro:
-                reader = csv.reader(ficheiro)        
+        for file in data.getFiles(r''): # file dentro do arquivo turma
+            with open(path + file, encoding='utf-8') as ficheiro: # abre com utf-8 o arquivo
+                reader = csv.reader(ficheiro) # lê para csv
                 try:
-                    for linha in reader:
-                        if linha:
-                            turmas[pos].append(data.cleanData(linha)) 
+                    for linha in reader: # linha por linha
+                        if linha: # linha não vazia
+                            turmas[pos].append(data.cleanData(linha)) # adiciona o elemento na turma
                 except csv.Error as e:
-                    sys.exit('ficheiro %s, linha %d: %s' % (file, reader.line_num, e))
-            pos += 1
+                    sys.exit('ficheiro %s, linha %d: %s' % (file, reader.line_num, e)) # erro de leitura
+            pos += 1 # pula pra proxima linha
 
         grupos = [e for e in turmas if e] # remove turmas vazias
         return turmas
@@ -47,13 +47,13 @@ class data:
         turmas = data.getTurmaList()
         
         pos = 0
-        nusp  = [list(), list()]
+        nusp  = [list(), list()]  
         nomes = [list(), list()]
-        for turma in turmas:
+        for turma in turmas: 
             for linha in turma:
-                nusp[pos].append(int(linha[0]))
-                nomes[pos].append(linha[1])
-            pos += 1
+                nusp[pos].append(int(linha[0])) # separar nusp da linha 
+                nomes[pos].append(linha[1]) # separar nome da linha
+            pos += 1  # proxima linha
         return nusp, nomes
 
     # * cria uma lista com os grupos disponibilizados (estático)
@@ -98,5 +98,3 @@ class data:
 
         grupos = [e for e in grupos if e] # remove grupos vazios
         return grupos
-
-
