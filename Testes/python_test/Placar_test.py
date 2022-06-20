@@ -6,11 +6,6 @@ class TestePlacar(ut.TestCase):
     p1:Placar = None
     p2:Placar = None
 
-    def setUp(self):
-        self.p = Placar()
-        self.p1 = Placar()
-        self.p2 = Placar()
-
     def Placar_test(self):
         p = Placar()
         p.add(3, [3,3,3,3,3])
@@ -32,6 +27,41 @@ class TestePlacar(ut.TestCase):
         p.add(8, [1,2,3,4,5])
         p.add(9, [2,2,2,2,2])
         p.add(10, [1,1,1,1,1])
+
+        k = p.getScore()
+        self.assertEqual(210, k)
+
+    def checkFailfull_test(self):
+        p = Placar()
+        p.add(1, [1,1,1,1,1])
+        p.add(2, [2,2,2,2,2])
+        p.add(3, [3,3,3,3,3])
+        p.add(4, [4,4,4,4,4])
+        p.add(5, [5,5,5,5,5])
+        p.add(6, [6,6,6,6,6])
+        p.add(7, [3,3,1,2,2])
+        p.add(8, [2,3,4,5,6])
+        p.add(9, [1,2,2,2,2])
+        p.add(10, [1,2,1,1,1])
+
+        j = p.getScore()
+        self.assertEqual(125, j)
+
+    def checkCC_test(self):
+        p = Placar()
+        p.add(1, [1,1,1,1,1])
+        p.add(2, [2,2,2,2,2])
+        p.add(3, [3,3,3,3,3])
+        p.add(4, [4,4,4,4,4])
+        p.add(5, [5,5,5,5,5])
+        p.add(6, [6,6,6,6,6])
+        p.add(7, [3,3,1,2,2])
+        p.add(8, [2,3,5,5,6])
+        p.add(9, [1,3,2,2,2])
+        p.add(10, [1,2,1,1,1])
+
+        k = p.getScore()
+        self.assertEqual(125, k)
 
 
     def GetScoreVazio_test(self):

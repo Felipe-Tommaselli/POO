@@ -130,7 +130,7 @@ public class Placar_test {
 	}
 	
 	@Test
-	public void GetScoreCasosRestantes_test() throws IllegalArgumentException, IOException {
+	public void GetScoreCC() throws IllegalArgumentException, IOException {
 		p.add(1, new int[] {1, 1, 1, 1, 1} );
 		p.add(2, new int[] {2, 2, 2, 2, 2} );
 		p.add(3, new int[] {3, 3, 3, 3, 3} );
