@@ -4,22 +4,22 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-public class Placar_test {
+public class Placar {
 
 	private Placar p;
 	
 	@Before
-	public void setUp() throws Exception {
+	public void testsetUp() throws Exception {
 		p = new Placar();
 	}
 
 	@After
-	public void tearDown() throws Exception {
+	public void testtearDown() throws Exception {
 		p = null;
 	}
 	
 	@Test
-	public void Add_test() {
+	public void testAdd() {
 		for(int i = 0; i < 11; i++){
 			try {
 				p.add(i, new int[] {1,2,3,4,5});
@@ -32,7 +32,7 @@ public class Placar_test {
 
 	
 	@Test
-	public void ReAdd_test(){
+	public void testReAdd(){
 		try {
 			p.add(1, new int[] {1,2,3,4,5});
 		} catch (Exception e) {
@@ -46,7 +46,7 @@ public class Placar_test {
 	}
 
 	@Test
-	public void AddInvalidPos_test() {
+	public void testAddInvalidPos() {
 		try {
 			p.add(0, new int[] {1,1,1,1,1});
 		} catch(Exception e) {
@@ -66,7 +66,7 @@ public class Placar_test {
 
 	
 	@Test
-	public void AddRepetitions_test(){
+	public void testAddRepetitions(){
 		for(int i = 0; i < 11; i++){
 			try {
 				p.add(i, new int[] {1,1,1,1,1});
@@ -78,7 +78,7 @@ public class Placar_test {
 	}
 	
 	@Test
-	public void AddBreais_test(){
+	public void testAddBreais(){
 		for(int i = 0; i < 11; i++){
 			try {
 				p.add(i, new int[] {1,2,1,1,1});
@@ -90,13 +90,13 @@ public class Placar_test {
 	}
 
 	@Test
-	public void GetScoreEmpty_test() {
+	public void testGetScoreEmpty() {
 		int i = p.getScore();
 		assertEquals(0, i);
 	}
 	
 	@Test
-	public void GetScoreFull_test() throws IllegalArgumentException, IOException {		
+	public void testGetScoreFull() throws IllegalArgumentException, IOException {		
 		p.add(1, new int[] {1, 1, 1, 1, 1} );
 		p.add(2, new int[] {2, 2, 2, 2, 2} );
 		p.add(3, new int[] {3, 3, 3, 3, 3} );
@@ -113,7 +113,7 @@ public class Placar_test {
 	}
 	
 	@Test
-	public void GetScoreFailFullHouse_test() throws IllegalArgumentException, IOException {
+	public void testGetScoreFailFullHouse() throws IllegalArgumentException, IOException {
 		p.add(1, new int[] {1, 1, 1, 1, 1} );
 		p.add(2, new int[] {2, 2, 2, 2, 2} );
 		p.add(3, new int[] {3, 3, 3, 3, 3} );
@@ -130,7 +130,7 @@ public class Placar_test {
 	}
 	
 	@Test
-	public void GetScoreCC() throws IllegalArgumentException, IOException {
+	public void testGetScoreCC() throws IllegalArgumentException, IOException {
 		p.add(1, new int[] {1, 1, 1, 1, 1} );
 		p.add(2, new int[] {2, 2, 2, 2, 2} );
 		p.add(3, new int[] {3, 3, 3, 3, 3} );
@@ -148,7 +148,7 @@ public class Placar_test {
 	
 
 	@Test
-	public void toStringNull() throws IllegalArgumentException, IOException {
+	public void testtoStringNull() throws IllegalArgumentException, IOException {
 		String str = "";
 		
 		str +=("  (1)  |");
@@ -181,18 +181,18 @@ public class Placar_test {
 	}
 
 	@Test
-	public void testGetScoreCasosRestantes2_test() throws IllegalArgumentException, IOException {
+	public void testGetScoreCasosRestantes2() throws IllegalArgumentException, IOException {
 		p.add(1, new int[] {1, 1, 1, 1, 1} );
 		p.add(1, new int[] {1, 2, 2, 2, 2} );
 	}
 
 	@Test
-	public void testToString_test() {
+	public void testToString() {
 		p.toString();
 	}
 	
 	@Test
-	public void testToStringWithValues_test(){
+	public void testToStringWithValues(){
 		String str = "";
 		
 		p.add(1, new int[] {1, 2, 3, 4, 5} );
