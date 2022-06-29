@@ -17,52 +17,65 @@ import java.io.FileReader;
 
 public class ContaPalavra {
 
+    /**
+     * programa para leitura do arquivo texto 
+     * inspiração do código: https://stackoverflow.com/questions/4716503/reading-a-plain-text-file-in-java
+     * @return
+     * @throws FileNotFoundException
+     * @throws IOException
+     */
 	public static String ContaPalavra() throws FileNotFoundException, IOException {
-        try (BufferedReader br = new BufferedReader(new FileReader("/home/gian/Documentos/file.txt"))){ //! 
+        try (BufferedReader br = new BufferedReader(new FileReader("C:\\Users\\felip\\Documents\\POO\\Collection\\text.txt"))){ //! 
             StringBuilder sb = new StringBuilder(); 
             String linha = br.readLine();     
-
             while (linha != null) {
                 sb.append(linha);
                 sb.append(System.lineSeparator());
                 linha = br.readLine();
             }
-            
             return sb.toString();
         }     
 	}
 	
-    public static void criaMapa(String palavras_na_linha){
-    	String str = palavras_na_linha;
-        Map<String, Integer> mapa = new HashMap<String, Integer>(); // Mapa de String para Integer
+    /**
+     * Cria o mapeamento das palavras no txt
+     * @param pl
+     */
+    public static void criaMapa(String pl){
+    	String s = pl;
+        Map<String, Integer> mapa = new HashMap<String, Integer>();
         
-        String[] palavras = str.split(" "); 
-        
-        // Itera as palavras que estão espaçadas
-        for(String palavra : palavras){
-            if(mapa.containsKey(palavra))
-                mapa.put(palavra, mapa.get(palavra) + 1); // Palavra já está no mapa, mas ocorre mais de uma vez
+        String[] palavras = s.split(" "); 
+        for(String p : palavras){
+            int cont = mapa.get(p);
+            if(mapa.containsKey(p))    
+                mapa.put(p, cont + 1); 
             else
-                mapa.put(palavra, 1); // Caso a palavra ainda não esteja no mapa, adiciona ela
+                mapa.put(p, 1);
         }
         mostraMapa(mapa);
 	}
     
+    /**
+     * Mostra e ordenada o mapeamento das palavras feito
+     * @param <K>
+     * @param <V>
+     * @param map
+     */
     public static <K extends Comparable,V extends Comparable> void mostraMapa(Map <K, V> map){
-    	List<K> map_key = new ArrayList<K>(map.keySet());
-    	Collections.sort(map_key);
+    	List<K> chaves = new ArrayList<K>(map.keySet());
+    	Collections.sort(chaves);
     	
-    	Map<K, V> sorted_map = new LinkedHashMap<K, V>();
-    	
-    	for(K key : map_key)
-    		sorted_map.put(key, map.get(key));
-    	
-    	System.out.println(sorted_map);
+    	Map<K, V> ordenado = new LinkedHashMap<K, V>();
+    	for(K c : chaves)
+    		ordenado.put(c, map.get(c));
+
+        System.out.println("\nMAPA DE PALAVRAS:\n");
+    	System.out.println(ordenado);
     }
-        
+
 	public static void main(String[] args) throws IOException{
 		String linha = ContaPalavra();
-		
 		criaMapa(linha);
 	}
 }
