@@ -1,4 +1,4 @@
-# POO (Programação Orientada a Objetos)/ OOP (Objected Oriented Programming)
+# POO (Programação Orientada a Objetos)/ OOP (Objected Oriented Programming) (2022)
 
 Compilado de programas, anotações e atividades da disciplina de POO (SSC0103) oferecida pelo ICMC-USP. Todos os programas desenvolvidos na disciplina foram feitos em linguagem Java e Python, possuindo apenas fins educacionais.
 
